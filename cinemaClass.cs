@@ -16,7 +16,7 @@ public class cinema
 
     public string getCinemaInfo()
     {
-        string cinemaInfo = this.location + "\n" + "There are " + this.rooms + "rooms" + "\n" + this.openingHours;
+        string cinemaInfo = this.location + "\n" + "There are " + this.rooms + " rooms" + "\n" + this.openingHours;
         return cinemaInfo;
     }
 

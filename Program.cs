@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System;
 
 namespace Fixed_project_B
 {
@@ -6,9 +7,28 @@ namespace Fixed_project_B
     {
         static void Main(string[] args)
         {
-            user Niels = new user("Niels", 1234, "password", "0987411@hr.nl", "0610919232");
-            cinema Gouda = new cinema("Burgemeester Jamessingel 25, 2803 WV Gouda", 3, "zondag 9:00 - 21:00\n maandag 9:00 - 21:00\n dinsdag 9:00 - 21:00\n woensdag 9:00 - 21:00\n donderdag 9:00 - 21:00\n vrijdag 9:00 - 21:00\n zaterdag 9:00 - 21:00\n" );
-            Console.WriteLine(Gouda.getCinemaInfo());
+            
+            Console.WriteLine("Where do you want to go?\nCinema Info\nRoom Info");
+            String volgendeMenu = Console.ReadLine();
+            Console.WriteLine("\n");
+            if (volgendeMenu == "cinema info")
+            {
+                Console.WriteLine(Gouda.getCinemaInfo());
+            }
+            if (volgendeMenu == "room info")
+            {
+                Console.WriteLine("Which room do you want information about?\n\nRoom A\nRoom B\n");
+                string gekozenRoom = Console.ReadLine();
+                Console.WriteLine("\n");
+                if (gekozenRoom == "room a")
+                {
+                    Console.WriteLine(roomA.getRoomInfo());
+                }
+                if (gekozenRoom == "room b")
+                {
+                    Console.WriteLine(roomB.getRoomInfo());
+                }
+            }
         }
     }
 }
