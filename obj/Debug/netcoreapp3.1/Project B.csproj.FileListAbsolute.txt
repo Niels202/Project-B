@@ -1,0 +1,26 @@
+C:\Coding\Fixed project B\bin\Debug\netcoreapp3.1\Project B.exe
+C:\Coding\Fixed project B\bin\Debug\netcoreapp3.1\Project B.deps.json
+C:\Coding\Fixed project B\bin\Debug\netcoreapp3.1\Project B.runtimeconfig.json
+C:\Coding\Fixed project B\bin\Debug\netcoreapp3.1\Project B.runtimeconfig.dev.json
+C:\Coding\Fixed project B\bin\Debug\netcoreapp3.1\Project B.dll
+C:\Coding\Fixed project B\bin\Debug\netcoreapp3.1\Project B.pdb
+C:\Coding\Fixed project B\obj\Debug\netcoreapp3.1\Project B.csprojAssemblyReference.cache
+C:\Coding\Fixed project B\obj\Debug\netcoreapp3.1\Project B.csproj.CoreCompileInputs.cache
+C:\Coding\Fixed project B\obj\Debug\netcoreapp3.1\Project B.AssemblyInfoInputs.cache
+C:\Coding\Fixed project B\obj\Debug\netcoreapp3.1\Project B.AssemblyInfo.cs
+C:\Coding\Fixed project B\obj\Debug\netcoreapp3.1\Project B.dll
+C:\Coding\Fixed project B\obj\Debug\netcoreapp3.1\Project B.pdb
+C:\Coding\Fixed project B\obj\Debug\netcoreapp3.1\Project B.genruntimeconfig.cache
+C:\Coding\Project B\bin\Debug\netcoreapp3.1\Project B.exe
+C:\Coding\Project B\bin\Debug\netcoreapp3.1\Project B.deps.json
+C:\Coding\Project B\bin\Debug\netcoreapp3.1\Project B.runtimeconfig.json
+C:\Coding\Project B\bin\Debug\netcoreapp3.1\Project B.runtimeconfig.dev.json
+C:\Coding\Project B\bin\Debug\netcoreapp3.1\Project B.dll
+C:\Coding\Project B\bin\Debug\netcoreapp3.1\Project B.pdb
+C:\Coding\Project B\obj\Debug\netcoreapp3.1\Project B.csprojAssemblyReference.cache
+C:\Coding\Project B\obj\Debug\netcoreapp3.1\Project B.csproj.CoreCompileInputs.cache
+C:\Coding\Project B\obj\Debug\netcoreapp3.1\Project B.AssemblyInfoInputs.cache
+C:\Coding\Project B\obj\Debug\netcoreapp3.1\Project B.AssemblyInfo.cs
+C:\Coding\Project B\obj\Debug\netcoreapp3.1\Project B.dll
+C:\Coding\Project B\obj\Debug\netcoreapp3.1\Project B.pdb
+C:\Coding\Project B\obj\Debug\netcoreapp3.1\Project B.genruntimeconfig.cache
