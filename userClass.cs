@@ -6,14 +6,13 @@ public class user
     public int id;
     public string email;
     public string phoneNumber;
-    public List<object> shoppingCart;
-
-    public user(string name, string email, string phoneNumber, List<object> shoppingCart)
+    
+    public user(string name, string email, string phoneNumber)
     {   
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.shoppingCart = shoppingCart;
+
     }
     public int getId()
     {

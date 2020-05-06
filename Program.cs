@@ -14,7 +14,7 @@ namespace Fixed_project_B
             int newUserId = 0;
             string volgendeMenu = "";
             Console.OutputEncoding = System.Text.Encoding.Unicode;
-            user Niels = new user("Niels", "0987411@hr.nl", "0610919232", new List<object>());
+            user Niels = new user("Niels", "0987411@hr.nl", "0610919232");
             cinema Gouda = new cinema("Burgemeester Jamessingel 25, 2803 WV Gouda", 3, "zondag 9:00 - 21:00\nmaandag 9:00 - 21:00\ndinsdag 9:00 - 21:00\nwoensdag 9:00 - 21:00\ndonderdag 9:00 - 21:00\nvrijdag 9:00 - 21:00\nzaterdag 9:00 - 21:00\n");
             Dictionary<string, List<List<string>>> roomsDict = new Dictionary<string, List<List<string>>>();
             string nameOfRoom = "notGiven";
@@ -65,7 +65,7 @@ namespace Fixed_project_B
                     Console.WriteLine("What is your phone number?");
                     string userPhoneNumber = Console.ReadLine();
                     newUserId = newUserId + 1;
-                    new user(userName, userEmail, userPhoneNumber, new List<object>());
+                    new user(userName, userEmail, userPhoneNumber);
                     Console.WriteLine("Enter a password");
                     string userPassword = Console.ReadLine();
                     users.Add(userName, userPassword);
@@ -112,6 +112,8 @@ namespace Fixed_project_B
                             } 
                         }
                     }
+                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application");
+                    volgendeMenu = Console.ReadLine();
                 }    
                 else if (volgendeMenu == "3")
                 {
