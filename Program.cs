@@ -31,52 +31,57 @@ namespace Fixed_project_B
             Console.WriteLine("2. Create new user");
             Console.WriteLine("3. Exit");
             volgendeMenu = Console.ReadLine();
-            if (volgendeMenu == "1")
+            while (login != "succesful")
             {
-                while (login != "succesful")
-                {
-                    Console.WriteLine("Enter your username"); 
-                    string enteredUsername = Console.ReadLine();
-                    Console.WriteLine("Enter your password");
-                    string enteredPassword = Console.ReadLine();
-                    if (users.ContainsKey(enteredUsername) && users[enteredUsername].Equals(enteredPassword))
-                    {
-                        login = "succesful";
-                        Console.WriteLine("Login succesful");
-                    }
-                    else
-                    {
-                        login = "failed";
-                        Console.WriteLine("Login failed");
-                    }
-                } 
-            }
                 
-            else if (volgendeMenu == "2")
-            {
-                Console.WriteLine("What is your name?");
-                string userName = Console.ReadLine();
-                Console.WriteLine("What is your email?");
-                string userEmail = Console.ReadLine();
-                Console.WriteLine("What is your phone number?");
-                string userPhoneNumber = Console.ReadLine();
-                newUserId = newUserId + 1;
-                new user(userName, userEmail, userPhoneNumber, new List<object>());
-                Console.WriteLine("Enter a password");
-                string userPassword = Console.ReadLine();
-
-                Console.WriteLine("What do you want to do?");
-                Console.WriteLine("1. Login");
-                Console.WriteLine("2. Create new user");
-                volgendeMenu = Console.ReadLine();
-            }
-
-            else if (volgendeMenu == "3")
-            {
-                Environment.Exit(0);
-            }
             
-                            
+                if (volgendeMenu == "1")
+                {
+                    while (login != "succesful")
+                    {
+                        Console.WriteLine("Enter your username"); 
+                        string enteredUsername = Console.ReadLine();
+                        Console.WriteLine("Enter your password");
+                        string enteredPassword = Console.ReadLine();
+                        if (users.ContainsKey(enteredUsername) && users[enteredUsername].Equals(enteredPassword))
+                        {
+                            login = "succesful";
+                            Console.WriteLine("Login succesful");
+                        }
+                        else
+                        {
+                            login = "failed";
+                            Console.WriteLine("Login failed");
+                        }
+                    } 
+                }
+                    
+                else if (volgendeMenu == "2")
+                {
+                    Console.WriteLine("What is your name?");
+                    string userName = Console.ReadLine();
+                    Console.WriteLine("What is your email?");
+                    string userEmail = Console.ReadLine();
+                    Console.WriteLine("What is your phone number?");
+                    string userPhoneNumber = Console.ReadLine();
+                    newUserId = newUserId + 1;
+                    new user(userName, userEmail, userPhoneNumber, new List<object>());
+                    Console.WriteLine("Enter a password");
+                    string userPassword = Console.ReadLine();
+                    users.Add(userName, userPassword);
+                    Console.WriteLine("What do you want to do?");
+                    Console.WriteLine("1. Login");
+                    Console.WriteLine("2. Create new user");
+                    Console.WriteLine("3. Exit application");
+                    volgendeMenu = Console.ReadLine();
+                }
+
+                else if (volgendeMenu == "3")
+                {
+                    Environment.Exit(0);
+                }
+            
+            }                
 
             Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit");
             volgendeMenu = Console.ReadLine();
@@ -97,8 +102,7 @@ namespace Fixed_project_B
                     {
                         Console.WriteLine(i.getRoomInfo());
                         foreach (KeyValuePair<string, List<List<string>>> currentRoom in roomsDict)
-                        {
-                            
+                        {                            
                             foreach(List<string> seats in roomsDict[currentRoom.Key]) {
                                 foreach (string square in seats)
                                 {
@@ -150,7 +154,7 @@ namespace Fixed_project_B
                     Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
                     Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application");
                     volgendeMenu = Console.ReadLine();  
-                } 
+                }
                 else if (volgendeMenu == "4")
                 {
                     Environment.Exit(0);
