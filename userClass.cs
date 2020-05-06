@@ -8,10 +8,9 @@ public class user
     public string phoneNumber;
     public List<object> shoppingCart;
 
-    public user(string name, int id, string email, string phoneNumber, List<object> shoppingCart)
+    public user(string name, string email, string phoneNumber, List<object> shoppingCart)
     {   
         this.name = name;
-        this.id = id;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.shoppingCart = shoppingCart;
