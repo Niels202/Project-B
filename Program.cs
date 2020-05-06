@@ -12,6 +12,7 @@ namespace Fixed_project_B
             string programState = "running";
             string login = "notYetDone";
             int newUserId = 0;
+            string volgendeMenu = "";
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             user Niels = new user("Niels", "0987411@hr.nl", "0610919232", new List<object>());
             cinema Gouda = new cinema("Burgemeester Jamessingel 25, 2803 WV Gouda", 3, "zondag 9:00 - 21:00\nmaandag 9:00 - 21:00\ndinsdag 9:00 - 21:00\nwoensdag 9:00 - 21:00\ndonderdag 9:00 - 21:00\nvrijdag 9:00 - 21:00\nzaterdag 9:00 - 21:00\n");
@@ -29,7 +30,7 @@ namespace Fixed_project_B
             Console.WriteLine("1. Login");
             Console.WriteLine("2. Create new user");
             Console.WriteLine("3. Exit");
-            string volgendeMenu = Console.ReadLine();
+            volgendeMenu = Console.ReadLine();
             if (volgendeMenu == "1")
             {
                 while (login != "succesful")
@@ -51,7 +52,7 @@ namespace Fixed_project_B
                 } 
             }
                 
-            if (volgendeMenu == "2")
+            else if (volgendeMenu == "2")
             {
                 Console.WriteLine("What is your name?");
                 string userName = Console.ReadLine();
@@ -70,26 +71,26 @@ namespace Fixed_project_B
                 volgendeMenu = Console.ReadLine();
             }
 
-            if (volgendeMenu == "3")
+            else if (volgendeMenu == "3")
             {
                 Environment.Exit(0);
             }
             
-            
+                            
+
+            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit");
+            volgendeMenu = Console.ReadLine();
+            Console.WriteLine("\n");
             
             while (programState == "running")
             {
-                
 
-                Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit");
-                volgendeMenu = Console.ReadLine();
-                Console.WriteLine("\n");
                 
                 if (volgendeMenu == "1")
                 {
                     Console.WriteLine(Gouda.getCinemaInfo());
                 }
-                if (volgendeMenu == "2")
+                else if (volgendeMenu == "2")
                 {
                     
                     foreach (room i in Rooms)
@@ -104,17 +105,18 @@ namespace Fixed_project_B
                                     Console.Write(square);
                                 }
                                 Console.Write("\n");
-                        } 
+                            } 
                         }
-                        
-                if (volgendeMenu == "3")
+                    }
+                }    
+                else if (volgendeMenu == "3")
                 {
                     Console.WriteLine("What is the room number?");
                     nameOfRoom = "Room " + Console.ReadLine();
                     Console.WriteLine("How many seats does the room have?");
                     string enteredNumberOfSeats = Console.ReadLine();
                     int numberOfSeats = Int32.Parse(enteredNumberOfSeats);
-                    Console.WriteLine("Does the room have 3D?\n1. Yes\n 2. No");
+                    Console.WriteLine("Does the room have 3D?\n1. Yes\n2. No");
                     string roomHas3D = Console.ReadLine();
                     if (roomHas3D == "1")
                     {
@@ -146,10 +148,10 @@ namespace Fixed_project_B
                     }
                     
                     Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
-                    Console.WriteLine("Where do you want to go?\nCinema Info\nRoom Info");
+                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application");
                     volgendeMenu = Console.ReadLine();  
                 } 
-                if (volgendeMenu == "4")
+                else if (volgendeMenu == "4")
                 {
                     Environment.Exit(0);
                 }    
@@ -159,7 +161,5 @@ namespace Fixed_project_B
             }
         }
     }
-}
-}
 
 

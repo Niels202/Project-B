@@ -20,7 +20,7 @@ public class  room
         if (this.has3D == true)
         {
             
-            return roomName + " has " + numberOfSeats + " seats\n" + "This room has 3D\n";
+            return roomName + " has " + numberOfSeats + " seats\n" + "This room has 3D";
         }
         else
         {
