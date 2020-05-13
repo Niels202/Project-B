@@ -83,7 +83,7 @@ namespace Fixed_project_B
             
             }                
 
-            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit");
+            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Reserve Ticket\n5. Exit Application");
             volgendeMenu = Console.ReadLine();
             Console.WriteLine("\n");
             
@@ -155,10 +155,10 @@ namespace Fixed_project_B
                     }
                     
                     Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
-                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application");
+                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Reserve Ticket\n5. Exit Application");
                     volgendeMenu = Console.ReadLine();  
                 }
-                else if (volgendeMenu == "5")
+                else if (volgendeMenu == "4")
                 {
                     List<string> seatCheckList = new List<string>()
                     {
@@ -206,7 +206,7 @@ namespace Fixed_project_B
                 }
 
 
-                else if (volgendeMenu == "4")
+                else if (volgendeMenu == "5")
                 {
                     Environment.Exit(0);
                 }    
