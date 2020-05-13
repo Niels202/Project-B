@@ -6,18 +6,19 @@ public class user
     public int id;
     public string email;
     public string phoneNumber;
-    public List<object> shoppingCart;
-
-    public user(string name, string email, string phoneNumber, List<object> shoppingCart)
+    public string role;
+    
+    public user(string name, string email, string phoneNumber, string role)
     {   
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.shoppingCart = shoppingCart;
+        this.role = role;
+
     }
-    public int getId()
+    public string getName()
     {
-        return this.id;
+        return this.name;
     }
 
 }
