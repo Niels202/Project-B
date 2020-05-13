@@ -40,7 +40,6 @@ namespace Fixed_project_B
                 while (programState == "loginMenu")
                 {
                     
-<<<<<<< HEAD
                 else if (volgendeMenu == "2")
                 {
                     Console.WriteLine("What is your name?");
@@ -75,8 +74,6 @@ namespace Fixed_project_B
             while (programState == "running")
             {
 
-=======
->>>>>>> d9d0b6ee0c6b5da5e12a8792f7355cc036fe1004
                 
                     if (volgendeMenu == "1")
                     {
@@ -232,13 +229,6 @@ namespace Fixed_project_B
                 else if (currentUser.role == "manager")
                 {
                     
-<<<<<<< HEAD
-                    Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
-                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Reserve Ticket\n5. Exit Application");
-                    volgendeMenu = Console.ReadLine();  
-                }
-                else if (volgendeMenu == "4")
-=======
                 }
 
                 else if (currentUser.role == "caterer")
@@ -247,7 +237,6 @@ namespace Fixed_project_B
                 }    
 
                 else if (volgendeMenu == "5")
->>>>>>> d9d0b6ee0c6b5da5e12a8792f7355cc036fe1004
                 {
                     List<string> seatCheckList = new List<string>()
                     {
