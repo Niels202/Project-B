@@ -6,17 +6,19 @@ public class user
     public int id;
     public string email;
     public string phoneNumber;
+    public string role;
     
-    public user(string name, string email, string phoneNumber)
+    public user(string name, string email, string phoneNumber, string role)
     {   
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.role = role;
 
     }
-    public int getId()
+    public string getName()
     {
-        return this.id;
+        return this.name;
     }
 
 }
