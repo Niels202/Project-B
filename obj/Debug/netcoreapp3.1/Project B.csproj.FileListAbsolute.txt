@@ -37,3 +37,16 @@ C:\Users\neles\OneDrive\Documents\GitHub\Project-B\obj\Debug\netcoreapp3.1\Proje
 C:\Users\neles\OneDrive\Documents\GitHub\Project-B\obj\Debug\netcoreapp3.1\Project B.dll
 C:\Users\neles\OneDrive\Documents\GitHub\Project-B\obj\Debug\netcoreapp3.1\Project B.pdb
 C:\Users\neles\OneDrive\Documents\GitHub\Project-B\obj\Debug\netcoreapp3.1\Project B.genruntimeconfig.cache
+C:\Users\Vince\Desktop\PrB\Project-B\obj\Debug\netcoreapp3.1\Project B.csprojAssemblyReference.cache
+C:\Users\Vince\Desktop\PrB\Project-B\obj\Debug\netcoreapp3.1\Project B.csproj.CoreCompileInputs.cache
+C:\Users\Vince\Desktop\PrB\Project-B\obj\Debug\netcoreapp3.1\Project B.AssemblyInfoInputs.cache
+C:\Users\Vince\Desktop\PrB\Project-B\obj\Debug\netcoreapp3.1\Project B.AssemblyInfo.cs
+C:\Users\Vince\Desktop\PrB\Project-B\obj\Debug\netcoreapp3.1\Project B.dll
+C:\Users\Vince\Desktop\PrB\Project-B\obj\Debug\netcoreapp3.1\Project B.pdb
+C:\Users\Vince\Desktop\PrB\Project-B\bin\Debug\netcoreapp3.1\Project B.exe
+C:\Users\Vince\Desktop\PrB\Project-B\bin\Debug\netcoreapp3.1\Project B.deps.json
+C:\Users\Vince\Desktop\PrB\Project-B\bin\Debug\netcoreapp3.1\Project B.runtimeconfig.json
+C:\Users\Vince\Desktop\PrB\Project-B\bin\Debug\netcoreapp3.1\Project B.runtimeconfig.dev.json
+C:\Users\Vince\Desktop\PrB\Project-B\bin\Debug\netcoreapp3.1\Project B.dll
+C:\Users\Vince\Desktop\PrB\Project-B\bin\Debug\netcoreapp3.1\Project B.pdb
+C:\Users\Vince\Desktop\PrB\Project-B\obj\Debug\netcoreapp3.1\Project B.genruntimeconfig.cache
