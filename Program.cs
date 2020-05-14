@@ -110,10 +110,6 @@ namespace Fixed_project_B
                     }
             
             }                
-
-            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Reserve Ticket\n5. Exit Application6. Log out");
-            volgendeMenu = Console.ReadLine();
-            Console.WriteLine("\n");
             
             while (programState == "running")
             {
@@ -122,7 +118,7 @@ namespace Fixed_project_B
                 {
                     
                 
-                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit\n5. Make reservation\n6. Log out");
+                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit application\n5. Make reservation\n6. Log out");
                     volgendeMenu = Console.ReadLine();
                     Console.WriteLine("\n");
                     
@@ -154,7 +150,7 @@ namespace Fixed_project_B
                                     } 
                                 }
                             }
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n5. Exit Application\n5. Make reservation\n6. Log out");
+                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application\n5. Make reservation\n6. Log out");
                             volgendeMenu = Console.ReadLine();
                         }    
                         else if (volgendeMenu == "3")
@@ -274,8 +270,8 @@ namespace Fixed_project_B
                         option2 = "";
                         option3 = "";
 
-                        Console.WriteLine("caterer menu \n 1. Add consumables \n 2. adjust consumables \n 3. show consumables");
-                        Console.WriteLine("chose option: "); option = Console.ReadLine();
+                        Console.WriteLine("caterer menu \n1. Add consumables \n2. adjust consumables \n3. show consumables\n4. Exit application\n5. Log out");
+                        Console.WriteLine("choose option: "); option = Console.ReadLine();
 
                         if (option == "1")
                         {
