@@ -8,23 +8,6 @@ namespace Fixed_project_B
     {
         static void Main(string[] args)
         {
-            int x = 0;
-            int cons_adjust = 0;            // A variable that gets the value that says which consumable from the list to adjust | line 131 |
-            string option = "";             // A variable that gets the value that says which option the user wants to select.
-            string option2 = "";            // A variable that gets the value that says which option the user wants to select.
-            string option3 = "";            // A variable that gets the value that says which option the user wants to select.
-            string k2;                      // A variable that gets the value that says the user want to go back | line 201 |
-            string loop = "";               // A variable to that stops the while-loop when needed | while-loop line 45  |
-            string loop0 = "";              // A variable to that stops the while-loop when needed | while-loop line 69  |
-            string loop1 = "";              // A variable to that stops the while-loop when needed | while-loop line 84  |
-            string loop2 = "";              // A variable to that stops the while-loop when needed | while-loop line 125 |
-            string loop3 = "";              // A variable to that stops the while-loop when needed | while-loop line 152 |
-            string loop4 = "";              // A variable to that stops the while-loop when needed | while-loop line 166 |
-            string typecheck0 = "";         // A varibale that gets a value assigned to it. That value gets checked if it is the right type to parse to the consumable object. | line 72  |
-            string typecheck1 = "";         // A varibale that gets a value assigned to it. That value gets checked if it is the right type to parse to the consumable object. | line 87  |
-            string typecheck2 = "";         // A varibale that gets a value assigned to it. That value gets checked if it is the right type to parse to the consumable object. | line 128 |
-            string typecheck3 = "";         // A varibale that gets a value assigned to it. That value gets checked if it is the right type to parse to the consumable object. | line 154 |
-            string typecheck4 = "";         // A varibale that gets a value assigned to it. That value gets checked if it is the right type to parse to the consumable object. | line 169 |
             bool has3D = true;
             string programState = "loginMenu";
             string login = "notYetDone";
@@ -111,7 +94,7 @@ namespace Fixed_project_B
             
             }                
 
-            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Reserve Ticket\n5. Exit Application6. Log out");
+            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
             volgendeMenu = Console.ReadLine();
             Console.WriteLine("\n");
             
@@ -122,7 +105,7 @@ namespace Fixed_project_B
                 {
                     
                 
-                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit\n5. Make reservation\n6. Log out");
+                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                     volgendeMenu = Console.ReadLine();
                     Console.WriteLine("\n");
                     
@@ -133,7 +116,7 @@ namespace Fixed_project_B
                         if (volgendeMenu == "1")
                         {
                             Console.WriteLine(Gouda.getCinemaInfo());
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application\n5. Make reservation\n6. Log out");
+                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                             volgendeMenu = Console.ReadLine(); 
                             
                         }
@@ -154,7 +137,7 @@ namespace Fixed_project_B
                                     } 
                                 }
                             }
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n5. Exit Application\n5. Make reservation\n6. Log out");
+                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                             volgendeMenu = Console.ReadLine();
                         }    
                         else if (volgendeMenu == "3")
@@ -196,14 +179,14 @@ namespace Fixed_project_B
                             }
                             
                             Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application\n5. Make reservation\n6. Log out");
+                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                             volgendeMenu = Console.ReadLine();  
                         }
-                        else if (volgendeMenu == "4")
+                        else if (volgendeMenu == "6")
                         {
                             Environment.Exit(0);
                         }
-                        else if (volgendeMenu == "5")
+                        else if (volgendeMenu == "4")
                         {
                             List<string> seatCheckList = new List<string>()
                             {
@@ -268,172 +251,7 @@ namespace Fixed_project_B
 
                 else if (currentUser.role == "caterer")
                 {
-                    List<Consumable> ConsumableList = new List<Consumable>();
-                    while (loop != "stop") {
-
-                        option2 = "";
-                        option3 = "";
-
-                        Console.WriteLine("caterer menu \n 1. Add consumables \n 2. adjust consumables \n 3. show consumables");
-                        Console.WriteLine("chose option: "); option = Console.ReadLine();
-
-                        if (option == "1")
-                        {
-                            Console.WriteLine("if you want to create / add a new consumable, type add. if you want to go back to the main menu, type back");
-                            while (option2 != "back") {
-                                
-                                option2 = Console.ReadLine();
-
-                                if (option2 == "add")
-                                {
-
-                                    option2 = "";
-                                    ConsumableList.Add(new Consumable());
-                                    Console.WriteLine("Creating new consumable... \n ");
-
-                                    Console.WriteLine("Name of new consumable: ");
-                                    ConsumableList[x].name = Console.ReadLine();
-
-                                    while (loop0 != "stop")
-                                    {
-                                        Console.WriteLine("Amount in stock of new consumable: ");
-                                        typecheck0 = Console.ReadLine();
-
-                                        if (int.TryParse(typecheck0, out ConsumableList[x].amount)) {
-                                            loop0 = "stop";
-                                        }
-
-                                        else {
-                                            Console.WriteLine("Wrong input, please try again.");
-                                        }
-                                    }
-                                    loop0 = "";
-
-                                    while (loop1 != "stop")
-                                    {
-                                        Console.WriteLine("The price of the new consumable: ");
-                                        typecheck1 = Console.ReadLine();
-
-                                        if (int.TryParse(typecheck1, out ConsumableList[x].price))
-                                        {
-                                            loop1 = "stop";
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Wrong input, please try again.");
-                                        }
-                                    }
-                                    loop1 = "";
-                                    ConsumableList[x].num += x;
-
-                                    Console.WriteLine("Do you want to add / create another consumable (type add) or back out to the main menu and safe? (type back) ");
-
-                                    option2 = "";
-                                    x = x + 1;
-                                }
-
-                                else if (option2 == "back") {
-                                    Console.WriteLine("");
-                                }
-
-                                else {
-                                    Console.WriteLine("Wrong answer! Please try again.");
-                                }
-
-                            }
-                        }
-
-                        else if (option == "2")
-                        {
-                            Console.WriteLine("if you want to adjust / change a consumable, press enter. If you want to go back to the main menu, type back");
-                            option3 = Console.ReadLine();
-
-                            while (option3 != "back") {
-
-                            while (loop2 != "stop") {
-                                Console.WriteLine("Which consumable do you want to adjust? Type in the number of the consumable.");
-                                Console.WriteLine("You can find the number of the consumable with option 3 of the main menu called show consumables.");
-                                typecheck2 = Console.ReadLine();
-
-                                if (int.TryParse(typecheck2, out cons_adjust))
-                                {
-                                    loop2 = "stop";
-                                }
-
-                                else
-                                {
-                                    Console.WriteLine("Wrong input, please try again.");
-                                }   
-                            }
-                            loop2 = "";
-
-                            if (cons_adjust <= x && cons_adjust >= 0)
-                                {
-                                    Console.WriteLine("Unajusted consumable: ");
-                                    Console.WriteLine(ConsumableList[cons_adjust].getData());
-
-                                    Console.WriteLine("Change what you want to change. Fill in the old value for the things you want to stay the same. \n");
-
-                                    Console.WriteLine("Name: ");
-                                    ConsumableList[cons_adjust].name = Console.ReadLine();
-
-                                    while (loop3 != "stop"){
-                                        Console.WriteLine("Amount in stock: ");
-                                        typecheck3 = Console.ReadLine();
-
-                                        if (int.TryParse(typecheck3, out ConsumableList[cons_adjust].amount)) {
-                                            loop3 = "stop";
-                                        }
-
-                                        else {
-                                            Console.WriteLine("Wrong input, please try again.");
-                                        }
-                                    }
-                                    loop3 = "";
-
-                                    while (loop4 != "stop")
-                                    {
-                                        Console.WriteLine("The price: ");
-                                        typecheck4 = Console.ReadLine();
-
-                                        if (int.TryParse(typecheck4, out ConsumableList[cons_adjust].amount))
-                                        {
-                                            loop4 = "stop";
-                                        }
-
-                                        else
-                                        {
-                                            Console.WriteLine("Wrong input, please try again.");
-                                        }
-                                    }
-                                    loop4 = "";
-
-                                    Console.WriteLine("\n Do you want to adjust another consumable? \n If you want to adjust another consumable, press enter. If you want to go back to the main menu, type back");
-                                    option3 = Console.ReadLine();
-                                }
-
-                                else {
-                                    Console.WriteLine("The consumable you are trying to adjust does not exist yet. Please try again.");
-                                }
-                            }
-                        }
-
-                        else if (option == "3")
-                        {
-                            foreach (Consumable i in ConsumableList) {
-                                Console.WriteLine(i.getData());
-
-                            } 
-                            Console.WriteLine("\n Type anything to go back.");
-                            k2 = Console.ReadLine();
-                        }
-
-                        else
-                        {
-                            Console.WriteLine("Wrong answer! please try again.");
-                        }
-
-                    }
+                    
                 }    
             }
         }
