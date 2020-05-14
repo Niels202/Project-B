@@ -39,8 +39,6 @@ namespace Fixed_project_B
             
                 while (programState == "loginMenu")
                 {
-                    
-                
                     if (volgendeMenu == "1")
                     {
                         while (login != "succesful")
@@ -69,7 +67,7 @@ namespace Fixed_project_B
                             }
                         } 
                     }
-                        
+                    
                     else if (volgendeMenu == "2")
                     {
                         Console.WriteLine("What is your name?");
@@ -78,7 +76,7 @@ namespace Fixed_project_B
                         string userEmail = Console.ReadLine();
                         Console.WriteLine("What is your phone number?");
                         string userPhoneNumber = Console.ReadLine();
-                        userList.Add(new user(userName, userEmail, userPhoneNumber,"customer"));
+                        new user(userName, userEmail, userPhoneNumber,  "customer");
                         Console.WriteLine("Enter a password");
                         string userPassword = Console.ReadLine();
                         users.Add(userName, userPassword);
@@ -87,14 +85,21 @@ namespace Fixed_project_B
                         Console.WriteLine("2. Create new user");
                         Console.WriteLine("3. Exit application");
                         volgendeMenu = Console.ReadLine();
-                    }    
+                    }
 
                     else if (volgendeMenu == "3")
                     {
                         Environment.Exit(0);
                     }
-                
-                }                
+            
+            }                
+
+            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Reserve Ticket\n5. Exit Application6. Log out");
+            volgendeMenu = Console.ReadLine();
+            Console.WriteLine("\n");
+            
+            while (programState == "running")
+            {
 
                 if (currentUser.role == "admin")
                 {
@@ -250,10 +255,10 @@ namespace Fixed_project_B
                 }    
             }
         }
-        
         }
-
     }
+}
+
 
 
 
