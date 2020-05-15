@@ -127,11 +127,12 @@ namespace Fixed_project_B
                             {
                                 Console.WriteLine(i.getRoomInfo());
                                 foreach (KeyValuePair<string, List<List<string>>> currentRoom in roomsDict)
-                                {                            
+                                {                           
                                     foreach(List<string> seats in roomsDict[currentRoom.Key]) {
                                         foreach (string square in seats)
                                         {
                                             Console.Write(square);
+                                            Console.Write(" ");
                                         }
                                         Console.Write("\n");
                                     } 
@@ -173,8 +174,10 @@ namespace Fixed_project_B
                                 roomsDict[nameOfRoom].Add(new List<string>());
                                 for (int a = 0; a < numberOfSeatsPerRow; a++)
                                 {
-                                    roomsDict[nameOfRoom][n].Add("□");
-                                    newRoomMap[n].Add("□");
+                                    int intA = a+1;
+                                    string stringA = intA.ToString();
+                                    roomsDict[nameOfRoom][n].Add(stringA);
+                                    newRoomMap[n].Add(stringA);
                                 }
                             }
                             
@@ -199,7 +202,8 @@ namespace Fixed_project_B
                             };
                                 
                             Console.WriteLine("Please enter the row and seat number you would like to reserve. If you have purchased multiple tickets the seat(s) to the right of the selected seat will automatically be chosen.\n\n");
-                            Console.WriteLine("Seat - 12345678910\n", "Row 1 -", roomsDict[nameOfRoom][0], "\n", "Row 2 -", roomsDict[nameOfRoom][1], "\n", "Row 3 -", roomsDict[nameOfRoom][2], "\n", "Row 4 -", roomsDict[nameOfRoom][3], "\n", "Row 5 -", roomsDict[nameOfRoom][4], "\n", "Row 6 -", roomsDict[nameOfRoom][5]);
+                            Console.WriteLine("Seat - 12345678910\n");
+                            //for (int roomMapReservation = 1; roomMapReservation < roomsDict[currentRoom.Key][alle rijen].length; roomMapReservation++);
                             Console.Write("Row: ");
                             string strRow = Console.ReadLine();
                             Console.Write("Seat number: ");
