@@ -8,6 +8,7 @@ namespace Fixed_project_B
     {
         static void Main(string[] args)
         {
+            // list of variables: their name, cause and where to find them.
             int x = 0;
             int cons_adjust = 0;            // A variable that gets the value that says which consumable from the list to adjust | line 131 |
             string option = "";             // A variable that gets the value that says which option the user wants to select.
@@ -129,7 +130,7 @@ namespace Fixed_project_B
                         if (volgendeMenu == "1")
                         {
                             Console.WriteLine(Gouda.getCinemaInfo());
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application\n5. Make reservation\n6. Log out");
+                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                             volgendeMenu = Console.ReadLine(); 
                             
                         }
@@ -192,14 +193,14 @@ namespace Fixed_project_B
                             }
                             
                             Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application\n5. Make reservation\n6. Log out");
+                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                             volgendeMenu = Console.ReadLine();  
                         }
-                        else if (volgendeMenu == "4")
+                        else if (volgendeMenu == "6")
                         {
                             Environment.Exit(0);
                         }
-                        else if (volgendeMenu == "5")
+                        else if (volgendeMenu == "4")
                         {
                             List<string> seatCheckList = new List<string>()
                             {
