@@ -200,10 +200,27 @@ namespace Fixed_project_B
                             {
                                 "1", "2", "3", "4", "5", "6"
                             };
-                                
-                            Console.WriteLine("Please enter the row and seat number you would like to reserve. If you have purchased multiple tickets the seat(s) to the right of the selected seat will automatically be chosen.\n\n");
-                            Console.WriteLine("Seat - 12345678910\n");
-                            //for (int roomMapReservation = 1; roomMapReservation < roomsDict[currentRoom.Key][alle rijen].length; roomMapReservation++);
+                            Console.WriteLine("\nInput the name of the room you would like to reserve tickets in the following format \"Room 1\"\n");
+                            nameOfRoom = Console.ReadLine();    
+                            Console.WriteLine("\nPlease enter the row and seat number you would like to reserve. If you have purchased multiple tickets the seat(s) to the right of the selected seat will automatically be chosen.\n\n");
+                            //Console.WriteLine("Seat - 12345678910\n");
+                            int dictCount = roomsDict[nameOfRoom].Count;
+                            //for (int roomMapReservation = 0; roomMapReservation < dictCount; roomMapReservation++)
+                            //{
+                            //    Console.WriteLine(roomsDict[nameOfRoom][roomMapReservation]);
+                            //}
+                            int rowCounter = 1;
+                            foreach(var i in roomsDict[nameOfRoom])
+                            {
+                                Console.Write("Row " + rowCounter + " - ");
+                                rowCounter++;
+                                foreach(var e in roomsDict[nameOfRoom][1])
+                                {
+                                    Console.Write(e);
+                                    Console.Write(" ");
+                                }
+                                Console.Write("\n");
+                            }
                             Console.Write("Row: ");
                             string strRow = Console.ReadLine();
                             Console.Write("Seat number: ");
@@ -219,7 +236,20 @@ namespace Fixed_project_B
                                     if (roomsDict[nameOfRoom][intRow-1][intSeat-1] != "-")
                                     {
                                         roomsDict[nameOfRoom][intRow-1][intSeat-1] = "-";
-                                        Console.WriteLine(roomsDict[nameOfRoom]);
+                                        rowCounter = 1;
+                                        foreach(var i in roomsDict[nameOfRoom])
+                                        {
+                                            Console.Write("Row " + rowCounter + " - ");
+                                            rowCounter++;
+                                            foreach(var e in roomsDict[nameOfRoom][1])
+                                            {
+                                                Console.Write(e);
+                                                Console.Write(" ");
+                                            }
+                                            Console.Write("\n");
+                                        }
+                                        Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                        volgendeMenu = Console.ReadLine(); 
                                     }
                                     else
                                     {
