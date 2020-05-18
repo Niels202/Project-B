@@ -244,7 +244,6 @@ namespace Fixed_project_B
                             {
                                 if (seatCheckList.Contains(strSeat))
                                 {
-                                    //int roomIndex = roomsDict.Values.ToList().IndexOf(nameOfRoom);
                                     int intRow = Convert.ToInt32(strRow);
                                     int intSeat = Convert.ToInt32(strSeat);
                                     if (roomsDict[nameOfRoom][intRow-1][intSeat-1] != "-")
@@ -268,16 +267,22 @@ namespace Fixed_project_B
                                     else
                                     {
                                         Console.WriteLine("Unable to reserve this seat. This seat has already been reserved.");
+                                        Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                        volgendeMenu = Console.ReadLine();
                                     }
                                 }
                                 else
                                 {
                                     Console.WriteLine("Invalid seat number.");
+                                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                    volgendeMenu = Console.ReadLine();
                                 }
                             }
                             else
                             {
                                 Console.WriteLine("Invalid row input.");
+                                Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                volgendeMenu = Console.ReadLine();
                             }
                         }    
                         else if (volgendeMenu == "6")
