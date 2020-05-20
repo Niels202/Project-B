@@ -254,7 +254,7 @@ namespace Fixed_project_B
                                         {
                                             Console.Write("Row " + rowCounter + " - ");
                                             rowCounter++;
-                                            foreach(var e in roomsDict[nameOfRoom][1])
+                                            foreach(var e in roomsDict[nameOfRoom][1])//1 naar i probren
                                             {
                                                 Console.Write(e);
                                                 Console.Write(" ");
