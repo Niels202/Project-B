@@ -88,18 +88,18 @@ namespace Fixed_project_B
                     
                     else if (volgendeMenu == "2")
                     {
-                        Console.WriteLine("What is your name?");
+                        Console.WriteLine("\nWhat is your name?");
                         string userName = Console.ReadLine();
-                        Console.WriteLine("What is your email?");
+                        Console.WriteLine("\nWhat is your email?");
                         string userEmail = Console.ReadLine();
-                        Console.WriteLine("What is your phone number?");
+                        Console.WriteLine("\nWhat is your phone number?");
                         string userPhoneNumber = Console.ReadLine();
                         new user(userName, userEmail, userPhoneNumber,  "customer");
-                        Console.WriteLine("Enter a password");
+                        Console.WriteLine("\nEnter a password");
                         string userPassword = Console.ReadLine();
                         users.Add(userName, userPassword);
-                        Console.WriteLine("What do you want to do?");
-                        Console.WriteLine("1. Login");
+                        Console.WriteLine("\nWhat do you want to do?");
+                        Console.WriteLine("\n1. Login");
                         Console.WriteLine("2. Create new user");
                         Console.WriteLine("3. Exit application");
                         volgendeMenu = Console.ReadLine();
@@ -152,16 +152,16 @@ namespace Fixed_project_B
                                     } 
                                 }
                             }
-                            Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application\n5. Make reservation\n6. Log out");
+                            Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                             volgendeMenu = Console.ReadLine();
                         }    
                         else if (volgendeMenu == "3")
                         {
-                            Console.WriteLine("What is the room number?");
+                            Console.WriteLine("\nWhat is the room number?");
                             nameOfRoom = "Room " + Console.ReadLine();
-                            Console.WriteLine("\nHow many seats does the room have?");
-                            string enteredNumberOfSeats = Console.ReadLine();
-                            int numberOfSeats = Int32.Parse(enteredNumberOfSeats);
+                            //Console.WriteLine("\nHow many seats does the room have?");/////////
+                            //string enteredNumberOfSeats = Console.ReadLine();
+                            //int numberOfSeats = Int32.Parse(enteredNumberOfSeats);
                             Console.WriteLine("\nDoes the room have 3D?\n1. Yes\n2. No");
                             string roomHas3D = Console.ReadLine();
                             if (roomHas3D == "1")
@@ -179,6 +179,7 @@ namespace Fixed_project_B
                             Console.WriteLine("\nHow many seats per row does the room have?");
                             string enteredNumberOfSeatsPerRow = Console.ReadLine();
                             int numberOfSeatsPerRow = Int32.Parse(enteredNumberOfSeatsPerRow);
+                            int numberOfSeats = numberOfRows*numberOfSeatsPerRow;
                             roomsDict.Add(nameOfRoom, new List<List<string>>());
                             List<List<string>> newRoomMap = new List<List<string>>();
                             
@@ -322,7 +323,7 @@ namespace Fixed_project_B
                         option2 = "";
                         option3 = "";
 
-                        Console.WriteLine("caterer menu \n1. Add consumables \n2. adjust consumables \n3. show consumables\n4. Exit application\n5. Log out");
+                        Console.WriteLine("Caterer Menu \n1. Add consumables \n2. Adjust consumables \n3. Show consumables\n4. Log out\n5. Exit application");
                         Console.WriteLine("choose option: "); option = Console.ReadLine();
 
                         if (option == "1")

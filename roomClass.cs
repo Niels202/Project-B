@@ -24,11 +24,11 @@ public class  room
         if (this.has3D == true)
         {
             
-            return roomName + " has " + numberOfSeats + " seats\n" + "This room has 3D";
+            return "\n" + roomName + " has " + numberOfSeats + " seats\n" + "This room has 3D";
         }
         else
         {
-            return roomName + " has " + numberOfSeats + " seats\n" + "This room does not have 3D\n";
+            return "\n" + roomName + " has " + numberOfSeats + " seats\n" + "This room does not have 3D\n";
         }
     }
 }
