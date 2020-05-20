@@ -119,7 +119,7 @@ namespace Fixed_project_B
                 {
                     
                 
-                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit application\n5. Make reservation\n6. Log out");
+                    Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit application\n5. Make reservation\n6. Log out");
                     volgendeMenu = Console.ReadLine();
                     Console.WriteLine("\n");
                     
@@ -130,7 +130,7 @@ namespace Fixed_project_B
                         if (volgendeMenu == "1")
                         {
                             Console.WriteLine(Gouda.getCinemaInfo());
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                            Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                             volgendeMenu = Console.ReadLine(); 
                             
                         }
@@ -152,7 +152,7 @@ namespace Fixed_project_B
                                     } 
                                 }
                             }
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application\n5. Make reservation\n6. Log out");
+                            Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application\n5. Make reservation\n6. Log out");
                             volgendeMenu = Console.ReadLine();
                         }    
                         else if (volgendeMenu == "3")
@@ -196,7 +196,7 @@ namespace Fixed_project_B
                             }
                             
                             Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                            Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                             volgendeMenu = Console.ReadLine();  
                         }
                         else if (volgendeMenu == "6")
@@ -216,72 +216,82 @@ namespace Fixed_project_B
                             };
                             Console.WriteLine("\nInput the name of the room you would like to reserve tickets in the following format \"Room 1\"\n");
                             nameOfRoom = Console.ReadLine();    
-                            Console.WriteLine("\nPlease enter the row and seat number you would like to reserve. If you have purchased multiple tickets the seat(s) to the right of the selected seat will automatically be chosen.\n\n");
-                            //Console.WriteLine("Seat - 12345678910\n");
-                            int dictCount = roomsDict[nameOfRoom].Count;
-                            //for (int roomMapReservation = 0; roomMapReservation < dictCount; roomMapReservation++)
-                            //{
-                            //    Console.WriteLine(roomsDict[nameOfRoom][roomMapReservation]);
-                            //}
+                            //roomsDict[roomName][rij][stoel]
                             int rowCounter = 1;
-                            foreach(var i in roomsDict[nameOfRoom])
+                            int mapTeller = 0;
+                            if (roomsDict.ContainsKey(nameOfRoom))
                             {
-                                Console.Write("Row " + rowCounter + " - ");
-                                rowCounter++;
-                                foreach(var e in roomsDict[nameOfRoom][1])
+                                int dictCount = roomsDict[nameOfRoom].Count;
+                                foreach(var i in roomsDict[nameOfRoom])
                                 {
-                                    Console.Write(e);
-                                    Console.Write(" ");
-                                }
-                                Console.Write("\n");
-                            }
-                            Console.Write("Row: ");
-                            string strRow = Console.ReadLine();
-                            Console.Write("Seat number: ");
-                            string strSeat = Console.ReadLine();
-
-                            if (rowCheckList.Contains(strRow))
-                            {
-                                if (seatCheckList.Contains(strSeat))
-                                {
-                                    int intRow = Convert.ToInt32(strRow);
-                                    int intSeat = Convert.ToInt32(strSeat);
-                                    if (roomsDict[nameOfRoom][intRow-1][intSeat-1] != "-")
+                                    Console.Write("Row " + rowCounter + " - ");
+                                    foreach(var e in roomsDict[nameOfRoom][mapTeller])
                                     {
-                                        roomsDict[nameOfRoom][intRow-1][intSeat-1] = "-";
-                                        rowCounter = 1;
-                                        foreach(var i in roomsDict[nameOfRoom])
+                                        Console.Write(e);
+                                        Console.Write(" ");
+                                    }
+                                    rowCounter++;
+                                    mapTeller++;
+                                    Console.Write("\n");
+                                }
+                                Console.WriteLine("\nPlease enter the row and seat number you would like to reserve.");
+                                Console.Write("Row: ");
+                                string strRow = Console.ReadLine();
+                                Console.Write("Seat number: ");
+                                string strSeat = Console.ReadLine();
+
+                                if (rowCheckList.Contains(strRow))
+                                {
+                                    if (seatCheckList.Contains(strSeat))
+                                    {
+                                        int intRow = Convert.ToInt32(strRow);
+                                        int intSeat = Convert.ToInt32(strSeat);
+                                        if (roomsDict[nameOfRoom][intRow-1][intSeat-1] != "-")
                                         {
-                                            Console.Write("Row " + rowCounter + " - ");
-                                            rowCounter++;
-                                            foreach(var e in roomsDict[nameOfRoom][1])//1 naar i probren
+                                            //roomsDict[roomName][rij][stoel]
+                                            roomsDict[nameOfRoom][intRow-1][intSeat-1] = "-";
+                                            rowCounter = 1;
+                                            mapTeller = 0;
+                                            foreach(var i in roomsDict[nameOfRoom])
                                             {
-                                                Console.Write(e);
-                                                Console.Write(" ");
+                                                Console.Write("Row " + rowCounter + ". ");
+                                                foreach(var e in roomsDict[nameOfRoom][mapTeller])
+                                                {
+                                                    Console.Write(e);
+                                                    Console.Write(" ");
+                                                }
+                                                rowCounter++;
+                                                mapTeller++;
+                                                Console.Write("\n");
                                             }
-                                            Console.Write("\n");
+                                            Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                            volgendeMenu = Console.ReadLine(); 
                                         }
-                                        Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
-                                        volgendeMenu = Console.ReadLine(); 
+                                        else
+                                        {
+                                            Console.WriteLine("Unable to reserve this seat. This seat has already been reserved.");
+                                            Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                            volgendeMenu = Console.ReadLine();
+                                        }
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Unable to reserve this seat. This seat has already been reserved.");
-                                        Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                        Console.WriteLine("\nInvalid seat number.");
+                                        Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                                         volgendeMenu = Console.ReadLine();
                                     }
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Invalid seat number.");
-                                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                    Console.WriteLine("\nInvalid row input.");
+                                    Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                                     volgendeMenu = Console.ReadLine();
                                 }
                             }
                             else
                             {
-                                Console.WriteLine("Invalid row input.");
-                                Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                Console.WriteLine("\nInvalid room name, check if you have used the right format and make sure the room exists.");
+                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                                 volgendeMenu = Console.ReadLine();
                             }
                         }    
@@ -289,8 +299,8 @@ namespace Fixed_project_B
                         {
                             programState = "loginMenu";
                         }
-                            
-                }       }
+                    }     
+                }
                 
                 else if (currentUser.role == "customer")
                 {
@@ -468,11 +478,10 @@ namespace Fixed_project_B
                         {
                             Console.WriteLine("Wrong answer! please try again.");
                         }
-
+                    }//waarom deze??
                     }
                 }    
             }
-        }
         }
     }
 }
