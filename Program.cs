@@ -159,10 +159,10 @@ namespace Fixed_project_B
                         {
                             Console.WriteLine("What is the room number?");
                             nameOfRoom = "Room " + Console.ReadLine();
-                            Console.WriteLine("How many seats does the room have?");
+                            Console.WriteLine("\nHow many seats does the room have?");
                             string enteredNumberOfSeats = Console.ReadLine();
                             int numberOfSeats = Int32.Parse(enteredNumberOfSeats);
-                            Console.WriteLine("Does the room have 3D?\n1. Yes\n2. No");
+                            Console.WriteLine("\nDoes the room have 3D?\n1. Yes\n2. No");
                             string roomHas3D = Console.ReadLine();
                             if (roomHas3D == "1")
                             {
@@ -173,10 +173,10 @@ namespace Fixed_project_B
                                 has3D = false;
                             }
                             
-                            Console.WriteLine("How many rows does the room have?");
+                            Console.WriteLine("\nHow many rows does the room have?");
                             string enteredNumberOfRows = Console.ReadLine();
                             int numberOfRows = Int32.Parse(enteredNumberOfRows);
-                            Console.WriteLine("How many seats per row does the room have?");
+                            Console.WriteLine("\nHow many seats per row does the room have?");
                             string enteredNumberOfSeatsPerRow = Console.ReadLine();
                             int numberOfSeatsPerRow = Int32.Parse(enteredNumberOfSeatsPerRow);
                             roomsDict.Add(nameOfRoom, new List<List<string>>());
@@ -215,7 +215,8 @@ namespace Fixed_project_B
                                 "1", "2", "3", "4", "5", "6"
                             };
                             Console.WriteLine("\nInput the name of the room you would like to reserve tickets in the following format \"Room 1\"\n");
-                            nameOfRoom = Console.ReadLine();    
+                            nameOfRoom = Console.ReadLine(); 
+                            Console.WriteLine("\n");
                             //roomsDict[roomName][rij][stoel]
                             int rowCounter = 1;
                             int mapTeller = 0;
@@ -239,6 +240,7 @@ namespace Fixed_project_B
                                 string strRow = Console.ReadLine();
                                 Console.Write("Seat number: ");
                                 string strSeat = Console.ReadLine();
+                                Console.WriteLine("\n");
 
                                 if (rowCheckList.Contains(strRow))
                                 {
