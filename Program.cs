@@ -31,14 +31,14 @@ namespace Fixed_project_B
             string login = "notYetDone";
             string volgendeMenu = "";
             Console.OutputEncoding = System.Text.Encoding.Unicode;
-            user currentUser = new user("","","","");
+            user currentUser = new user("","","","", 0, new List<string>());
             cinema Gouda = new cinema("Burgemeester Jamessingel 25, 2803 WV Gouda", 3, "zondag 9:00 - 21:00\nmaandag 9:00 - 21:00\ndinsdag 9:00 - 21:00\nwoensdag 9:00 - 21:00\ndonderdag 9:00 - 21:00\nvrijdag 9:00 - 21:00\nzaterdag 9:00 - 21:00\n");
             Dictionary<string, List<List<string>>> roomsDict = new Dictionary<string, List<List<string>>>();
             string nameOfRoom = "notGiven";
             List<object> Rooms = new List<object>();
             List<user> userList = new List<user>()
             {
-                new user("admin", "0987411@hr.nl", "0610919232", "admin")
+                new user("admin", "0987411@hr.nl", "0610919232", "admin", 1000000, new List<string>())
             };
             Dictionary<string, string> users = new Dictionary<string, string>()
             {
@@ -94,7 +94,7 @@ namespace Fixed_project_B
                         string userEmail = Console.ReadLine();
                         Console.WriteLine("\nWhat is your phone number?");
                         string userPhoneNumber = Console.ReadLine();
-                        new user(userName, userEmail, userPhoneNumber,  "customer");
+                        new user(userName, userEmail, userPhoneNumber,  "customer", 0, new List<string>());
                         Console.WriteLine("\nEnter a password");
                         string userPassword = Console.ReadLine();
                         users.Add(userName, userPassword);
@@ -180,6 +180,9 @@ namespace Fixed_project_B
                             string enteredNumberOfSeatsPerRow = Console.ReadLine();
                             int numberOfSeatsPerRow = Int32.Parse(enteredNumberOfSeatsPerRow);
                             int numberOfSeats = numberOfRows*numberOfSeatsPerRow;
+                            Console.WriteLine("How much does a ticket for this room cost?"); //Price per ticket 
+                            string strTicketPrice = Console.ReadLine();
+                            int intTicketPrice = Int32.Parse(strTicketPrice);
                             roomsDict.Add(nameOfRoom, new List<List<string>>());
                             List<List<string>> newRoomMap = new List<List<string>>();
                             
