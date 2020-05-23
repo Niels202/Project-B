@@ -31,18 +31,25 @@ namespace Fixed_project_B
             string login = "notYetDone";
             string volgendeMenu = "";
             Console.OutputEncoding = System.Text.Encoding.Unicode;
-            user currentUser = new user("","","","");
+            user currentUser = new user("","","","","");
+            admin currentUser = new admin("","","","","");
+            user currentCustomer = new customer("","","","","","");
+            caterer currentCaterer = new caterer("","","","","");
             cinema Gouda = new cinema("Burgemeester Jamessingel 25, 2803 WV Gouda", 3, "zondag 9:00 - 21:00\nmaandag 9:00 - 21:00\ndinsdag 9:00 - 21:00\nwoensdag 9:00 - 21:00\ndonderdag 9:00 - 21:00\nvrijdag 9:00 - 21:00\nzaterdag 9:00 - 21:00\n");
             Dictionary<string, List<List<string>>> roomsDict = new Dictionary<string, List<List<string>>>();
             string nameOfRoom = "notGiven";
             List<object> Rooms = new List<object>();
             List<user> userList = new List<user>()
             {
-                new user("admin", "0987411@hr.nl", "0610919232", "admin")
+
             };
+            List<admin> adminList = new List<admin>()
+            {
+                new admin("admin", "0987411@hr.nl", "0610919232", "admin", "password")
+            }
             Dictionary<string, string> users = new Dictionary<string, string>()
             {
-                {"admin", "password"}
+                {"admin", "admin"}
 
             };
 
@@ -63,6 +70,10 @@ namespace Fixed_project_B
                         {
                             Console.WriteLine("Enter your username"); 
                             string enteredUsername = Console.ReadLine();
+                            if (users[enteredUsername] == "admin" )
+                            {
+                                
+                            }
                             Console.WriteLine("Enter your password");
                             string enteredPassword = Console.ReadLine();
                             if (users.ContainsKey(enteredUsername) && users[enteredUsername].Equals(enteredPassword))
@@ -118,10 +129,10 @@ namespace Fixed_project_B
                 if (currentUser.role == "admin")
                 {
                     
-                
-                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit application\n5. Make reservation\n6. Log out");
+                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit application\n5. Make reservation\n6. Log out\n7. Create new user");
                     volgendeMenu = Console.ReadLine();
                     Console.WriteLine("\n");
+                    
                     
                     while (programState == "running")
                     {
@@ -130,7 +141,7 @@ namespace Fixed_project_B
                         if (volgendeMenu == "1")
                         {
                             Console.WriteLine(Gouda.getCinemaInfo());
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
                             volgendeMenu = Console.ReadLine(); 
                             
                         }
@@ -151,7 +162,7 @@ namespace Fixed_project_B
                                     } 
                                 }
                             }
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application\n5. Make reservation\n6. Log out");
+                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application\n5. Make reservation\n6. Log out\n7. Create new user");
                             volgendeMenu = Console.ReadLine();
                         }    
                         else if (volgendeMenu == "3")
@@ -193,7 +204,7 @@ namespace Fixed_project_B
                             }
                             
                             Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
-                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
                             volgendeMenu = Console.ReadLine();  
                         }
                         else if (volgendeMenu == "6")
@@ -245,11 +256,33 @@ namespace Fixed_project_B
                             {
                                 Console.WriteLine("Invalid row input.");
                             }
+                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
+                            volgendeMenu = Console.ReadLine();
                         }    
+
+                            
                         else if (volgendeMenu == "6")
                         {
                             programState = "loginMenu";
                         }
+                        else if (volgendeMenu == "7")
+                        {
+                            Console.WriteLine("What is the users role?");
+                            string userRole = Console.ReadLine();    
+                            Console.WriteLine("What is the users name?");
+                            string userName = Console.ReadLine();
+                            Console.WriteLine("What is the users email?");
+                            string userEmail = Console.ReadLine();
+                            Console.WriteLine("What is the users phone number?");
+                            string userPhoneNumber = Console.ReadLine();
+                            new user(userName, userEmail, userPhoneNumber, userRole);
+                            Console.WriteLine("Enter a password for the user");
+                            string userPassword = Console.ReadLine();
+                            users.Add(userName, userPassword);
+                            Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
+                            volgendeMenu = Console.ReadLine();
+                        }
+                        
                             
                 }       }
                 

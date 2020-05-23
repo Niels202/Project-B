@@ -1,25 +1,17 @@
-//using System;
-//public class customer : user
-//{
-//    public int age;
+using System;
 
- //   public customer(int age)
-   // {   
-     //   this.age = age;
-    //}
+
+class customer : user
+{
+    public string age;
     
 
-    //public string buyConsumables(int num, string name, int amount, float price)
-    //{
 
+    public customer(string name, string email, string phoneNumber, string role, string password, string age) : base(name, email, phoneNumber, role, password)
+    {   
+        this.age = age;
+    }
 
-    //}
-
-    //public string makeReservation
-    //{
-        
-        
-    //}
-//}
+}
 
 
