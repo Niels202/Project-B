@@ -25,11 +25,6 @@ namespace projectB2
 
 		public Consumable Copy() => new Consumable() { name = name, amount = amount, num = num, price = price };
 
-		public string func()
-		{
-			int a = 0;
-			return "hey";
-		}
 
 	}
 
@@ -38,7 +33,7 @@ namespace projectB2
 
 		static void Main(string[] args)
 		{
-			
+
 
 			// list of variables: their name, cause and where to find them.
 			int x = 0;
@@ -46,6 +41,9 @@ namespace projectB2
 			int x22 = 0;
 			int x3 = 0;
 			int x4 = 0;
+			int x5 = 0;
+			int x55 = 0;
+			int x6 = 0;
 			int totalprice = 0;
 			int cons_adjust = 0;            // A variable that gets the value that says which consumable from the list to adjust | line 131 |
 			int item_amount = 0;
@@ -57,6 +55,7 @@ namespace projectB2
 			string loop = "";               // A variable to that stops the while-loop when needed | while-loop line 45  |
 			string loop0 = "";              // A variable to that stops the while-loop when needed | while-loop line 69  |
 			string loop1 = "";              // A variable to that stops the while-loop when needed | while-loop line 84  |
+			string loop2 = "";
 			string typecheck = "";          // A varibale that gets a value assigned to it. That value gets checked if it is the right type to parse to the consumable object. | line 72  |
 
 			string user = "";               // A variable that gets a value containing the user-type storred into it. | line 51 |
@@ -78,7 +77,6 @@ namespace projectB2
 				{
 					loop0 = "stop";
 				}
-
 			}
 			loop0 = "";
 
@@ -311,10 +309,16 @@ namespace projectB2
 				ConsumableList[3].price = 2;
 
 				List<Consumable> ConsumableList_change = ConsumableList.Select(x => x.Copy()).ToList();
+				List<Consumable> ConsumableList_cart = ConsumableList.Select(x => x.Copy()).ToList();
+
+				foreach (Consumable i in ConsumableList_cart)
+				{
+					i.amount = 0;
+				}
 
 				while (loop1 != "stop")
 				{
-
+					x2 = 0;
 					Console.Clear();
 					Console.WriteLine("Welcome customer! \n Chose the product(number) you want to put in your cart or one of the other options.");
 					Console.WriteLine("Items in your cart: " + item_amount + " " + "| Te betalen: " + totalprice + " | " + "Money in account: " + money);
@@ -352,31 +356,111 @@ namespace projectB2
 
 					if (x3 == x22)
 					{
-						Console.WriteLine("unavaileble");
-					}
+						while (loop2 != "stop")
+						{
+							List<int> og_listposition = new List<int>();
+							x2 = 0;
+							x55 = 0;
 
-					else if (x3 == (x22 + 1))
-					{
-						while (loop0 != "stop") {
-							Console.WriteLine("Are you sure you want to pay? \n Press enter to proceed, type back if you want to go back.");
-							option4 = Console.ReadLine();
+							Console.WriteLine("The products in your cart: \n select the number of the product you would like to adjust the amount of. ");
 
-							if (option4 == "back")
+							foreach (Consumable i in ConsumableList_cart)
 							{
-
+								if (i.amount > 0)
+								{
+									Console.WriteLine(x55 + ". " + i.name + ": " + i.amount);
+									x55 += 1;
+									og_listposition.Add(x2);
+								}
+								x2 += 1;
 							}
+							Console.WriteLine(x55 + ". back out");
 
-							else if (option4 == "")
+							while (loop0 != "stop")
 							{
-								money = money - totalprice;
-								Console.WriteLine("Thank you for your purchase.");
-								loop1 = "stop";
+								Console.WriteLine("select your option number: ");
+								typecheck = Console.ReadLine();
+
+								if (int.TryParse(typecheck, out x5) && x5 >= 0 && x5 <= x55)
+								{
+									loop0 = "stop";
+								}
+
+								else
+								{
+									Console.WriteLine("Wrong input. Please try again.");
+								}
+							}
+							loop0 = "";
+							typecheck = "";
+
+							if (x5 == x55)
+							{
+								loop2 = "stop";
 							}
 
 							else
 							{
-								Console.WriteLine("Wrong input, please try again.");
+								while (loop0 != "stop")
+								{
+									Console.WriteLine("name: " + ConsumableList[og_listposition[x5]].name + " | current amount in your cart: " + ConsumableList_change[og_listposition[x5]].amount + ".");
+									Console.WriteLine("New amount: ");
+									typecheck = Console.ReadLine();
+
+									if (int.TryParse(typecheck, out x6) && x6 >= 0 && x6 <= ConsumableList[og_listposition[x5]].amount)
+									{
+										loop0 = "stop";
+									}
+
+									else
+									{
+										Console.WriteLine("Wrong input. Please try again.");
+									}
+								}
+								loop0 = "";
+								typecheck = "";
+
+								ConsumableList_change[og_listposition[x5]].amount = (ConsumableList_change[og_listposition[x5]].amount + ConsumableList_cart[og_listposition[x5]].amount);
+								ConsumableList_cart[og_listposition[x5]].amount = x6;
+								ConsumableList_change[og_listposition[x5]].amount = ConsumableList_change[og_listposition[x5]].amount - x6;
 							}
+						}
+						loop2 = "";
+					}
+
+					else if (x3 == (x22 + 1))
+					{
+						if (money >= totalprice)
+						{
+
+							while (loop0 != "stop")
+							{
+								Console.WriteLine("Are you sure you want to pay? \n Press enter to proceed, type back if you want to go back.");
+								option4 = Console.ReadLine();
+
+								if (option4 == "back")
+								{
+
+								}
+
+								else if (option4 == "")
+								{
+									money = money - totalprice;
+									ConsumableList = ConsumableList_change.Select(x => x.Copy()).ToList();
+									Console.WriteLine("Thank you for your purchase.");
+									loop1 = "stop";
+								}
+
+								else
+								{
+									Console.WriteLine("Wrong input, please try again.");
+								}
+							}
+						}
+
+						else
+						{
+							Console.WriteLine("You do not have enough money for this purchase, please change the amount that is in your cart.");
 						}
 					}
 
@@ -407,6 +491,7 @@ namespace projectB2
 
 						item_amount += x4;
 						ConsumableList_change[x3].amount = (ConsumableList_change[x3].amount - x4);
+						ConsumableList_cart[x3].amount = (ConsumableList_cart[x3].amount + x4);
 						totalprice = totalprice + ConsumableList_change[x3].price * x4;
 					}
 				}
