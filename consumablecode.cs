@@ -420,6 +420,7 @@ namespace projectB2
 								loop0 = "";
 								typecheck = "";
 
+								totalprice = totalprice - (ConsumableList_change[og_listposition[x5]].price * ConsumableList_cart[og_listposition[x5]].amount);
 								ConsumableList_change[og_listposition[x5]].amount = (ConsumableList_change[og_listposition[x5]].amount + ConsumableList_cart[og_listposition[x5]].amount);
 								ConsumableList_cart[og_listposition[x5]].amount = x6;
 								ConsumableList_change[og_listposition[x5]].amount = ConsumableList_change[og_listposition[x5]].amount - x6;
@@ -440,15 +441,17 @@ namespace projectB2
 
 								if (option4 == "back")
 								{
-
+									loop0 = "stop";
 								}
 
 								else if (option4 == "")
 								{
 									money = money - totalprice;
 									ConsumableList = ConsumableList_change.Select(x => x.Copy()).ToList();
+									totalprice = 0;
+									item_amount = 0;
 									Console.WriteLine("Thank you for your purchase.");
-									loop1 = "stop";
+									loop0 = "stop";
 								}
 
 								else
@@ -456,6 +459,7 @@ namespace projectB2
 									Console.WriteLine("Wrong input, please try again.");
 								}
 							}
+							loop0 = "";
 						}
 
 						else
@@ -467,6 +471,8 @@ namespace projectB2
 					else if (x3 == (x22 + 2))
 					{
 						loop1 = "stop";
+						totalprice = 0;
+						item_amount = 0;
 					}
 
 					else
