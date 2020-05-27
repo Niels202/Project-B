@@ -1,27 +1,27 @@
-using System;
+//using System;
+//
+//namespace projectB2
+//{
+//    public class customer : user
+//    {
+//        public int age;
+//
+//        public customer(int age)
+//        {
+//            this.age = age;
+//        }
+//
 
-namespace projectB2
-{
-    public class customer : user
-    {
-        public int age;
-
-        public customer(int age)
-        {
-            this.age = age;
-        }
-
-
-        public string buyConsumables(int num, string name, int amount, float price)
-        {
-
-
-        }
-
-        public string makeReservation
-        {
+  //      public string buyConsumables(int num, string name, int amount, float price)
+  //      {
 
 
-        }
-    }
-}
+  //      }
+
+    //    public string makeReservation
+      //  {
+
+
+    //    }
+   // }
+//}

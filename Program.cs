@@ -180,7 +180,7 @@ namespace Fixed_project_B
                             string enteredNumberOfSeatsPerRow = Console.ReadLine();
                             int numberOfSeatsPerRow = Int32.Parse(enteredNumberOfSeatsPerRow);
                             int numberOfSeats = numberOfRows*numberOfSeatsPerRow;
-                            Console.WriteLine("How much does a ticket for this room cost?"); //Price per ticket 
+                            Console.WriteLine("How much does a ticket for this room cost?"); //Price per ticket
                             string strTicketPrice = Console.ReadLine();
                             int intTicketPrice = Int32.Parse(strTicketPrice);
                             roomsDict.Add(nameOfRoom, new List<List<string>>());
