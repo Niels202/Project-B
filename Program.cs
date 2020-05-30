@@ -209,7 +209,7 @@ namespace Fixed_project_B
                         }
                         else if (volgendeMenu == "4")
                         {
-                            List<string> seatCheckList = new List<string>()
+                            List<string> seatCheckList = new List<string>()//Change this to check if input is int
                             {
                                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
                             };
@@ -219,7 +219,7 @@ namespace Fixed_project_B
                                 "1", "2", "3", "4", "5", "6"
                             };
                             Console.WriteLine("\nInput the name of the room you would like to reserve tickets in the following format \"Room 1\"\n");
-                            nameOfRoom = Console.ReadLine(); 
+                            nameOfRoom = Console.ReadLine();
                             Console.WriteLine("\n");
                             //roomsDict[roomName][rij][stoel]
                             int rowCounter = 1;
@@ -229,7 +229,7 @@ namespace Fixed_project_B
                                 int dictCount = roomsDict[nameOfRoom].Count;
                                 foreach(var i in roomsDict[nameOfRoom])
                                 {
-                                    Console.Write("Row " + rowCounter + " - ");
+                                    Console.Write("Row " + rowCounter + ". ");
                                     foreach(var e in roomsDict[nameOfRoom][mapTeller])
                                     {
                                         Console.Write(e);
