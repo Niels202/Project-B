@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 
 
-class admin : user
+class manager : user
 {
-    public admin(string name, string email, string phoneNumber, string role, string password, int balance, List<string> shoppingCart) : base(name, email, phoneNumber, role, password, balance, shoppingCart)
+    public manager(string name, string email, string phoneNumber, string role, string password, int balance, List<string> shoppingCart) : base(name, email, phoneNumber, role, password, balance, shoppingCart)
     {   
         this.name = name;
         this.email = email;
