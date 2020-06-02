@@ -184,6 +184,7 @@ namespace Fixed_project_B
                             string strTicketPrice = Console.ReadLine();
                             int intTicketPrice = Int32.Parse(strTicketPrice);
                             roomsDict.Add(nameOfRoom, new List<List<string>>());
+                            //roomsDict.Add(nameOfRoom, intTicketPrice);
                             List<List<string>> newRoomMap = new List<List<string>>();
                             
                             for (int n = 0; n < numberOfRows; n++)
@@ -199,7 +200,7 @@ namespace Fixed_project_B
                                 }
                             }
                             
-                            Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
+                            Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, intTicketPrice, newRoomMap));
                             Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                             volgendeMenu = Console.ReadLine();  
                         }
@@ -256,6 +257,8 @@ namespace Fixed_project_B
                                         {
                                             //roomsDict[roomName][rij][stoel]
                                             roomsDict[nameOfRoom][intRow-1][intSeat-1] = "-";
+                                            //if user has enough money
+                                            //currentUser.balance -= roomsDict[nameOfRoom].intTicketPrice;
                                             rowCounter = 1;
                                             mapTeller = 0;
                                             foreach(var i in roomsDict[nameOfRoom])
