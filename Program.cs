@@ -248,7 +248,22 @@ namespace Fixed_project_B
                                 volgendeMenu = Console.ReadLine(); 
                                 
                             }
-                            else if (volgendeMenu == "2")
+                            
+                            Console.WriteLine("\nHow many rows does the room have?");
+                            string enteredNumberOfRows = Console.ReadLine();
+                            int numberOfRows = Int32.Parse(enteredNumberOfRows);
+                            Console.WriteLine("\nHow many seats per row does the room have?");
+                            string enteredNumberOfSeatsPerRow = Console.ReadLine();
+                            int numberOfSeatsPerRow = Int32.Parse(enteredNumberOfSeatsPerRow);
+                            int numberOfSeats = numberOfRows*numberOfSeatsPerRow;
+                            Console.WriteLine("How much does a ticket for this room cost?"); //Price per ticket
+                            string strTicketPrice = Console.ReadLine();
+                            int intTicketPrice = Int32.Parse(strTicketPrice);
+                            roomsDict.Add(nameOfRoom, new List<List<string>>());
+                            //roomsDict.Add(nameOfRoom, intTicketPrice);
+                            List<List<string>> newRoomMap = new List<List<string>>();
+                            
+                            for (int n = 0; n < numberOfRows; n++)
                             {
                                 
                                 foreach (room i in Rooms)
@@ -266,10 +281,34 @@ namespace Fixed_project_B
                                         } 
                                     }
                                 }
-                                Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Exit Application\n5. Make reservation\n6. Log out\n7. Create new user");
-                                volgendeMenu = Console.ReadLine();
-                            }    
-                            else if (volgendeMenu == "3")
+                            }
+                            
+                            Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, intTicketPrice, newRoomMap));
+                            Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                            volgendeMenu = Console.ReadLine();  
+                        }
+                        else if (volgendeMenu == "6")
+                        {
+                            Environment.Exit(0);
+                        }
+                        else if (volgendeMenu == "4")
+                        {
+                            List<string> seatCheckList = new List<string>()//Change this to check if input is int
+                            {
+                                "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+                            };
+
+                            List<string> rowCheckList = new List<string>()
+                            {
+                                "1", "2", "3", "4", "5", "6"
+                            };
+                            Console.WriteLine("\nInput the name of the room you would like to reserve tickets in the following format \"Room 1\"\n");
+                            nameOfRoom = Console.ReadLine();
+                            Console.WriteLine("\n");
+                            //roomsDict[roomName][rij][stoel]
+                            int rowCounter = 1;
+                            int mapTeller = 0;
+                            if (roomsDict.ContainsKey(nameOfRoom))
                             {
                                 Console.WriteLine("\nWhat is the room number?");
                                 nameOfRoom = "Room " + Console.ReadLine();
@@ -302,9 +341,8 @@ namespace Fixed_project_B
                                 
                                 for (int n = 0; n < numberOfRows; n++)
                                 {
-                                    newRoomMap.Add(new List<string>());
-                                    roomsDict[nameOfRoom].Add(new List<string>());
-                                    for (int a = 0; a < numberOfSeatsPerRow; a++)
+                                    Console.Write("Row " + rowCounter + ". ");
+                                    foreach(var e in roomsDict[nameOfRoom][mapTeller])
                                     {
                                         int intA = a+1;
                                         string stringA = intA.ToString();
@@ -368,6 +406,13 @@ namespace Fixed_project_B
                                             int intRow = Convert.ToInt32(strRow);
                                             int intSeat = Convert.ToInt32(strSeat);
                                             if (roomsDict[nameOfRoom][intRow-1][intSeat-1] != "-")
+                                            //roomsDict[roomName][rij][stoel]
+                                            roomsDict[nameOfRoom][intRow-1][intSeat-1] = "-";
+                                            //if user has enough money
+                                            //currentUser.balance -= roomsDict[nameOfRoom].intTicketPrice;
+                                            rowCounter = 1;
+                                            mapTeller = 0;
+                                            foreach(var i in roomsDict[nameOfRoom])
                                             {
                                                 //roomsDict[roomName][rij][stoel]
                                                 roomsDict[nameOfRoom][intRow-1][intSeat-1] = "-";
