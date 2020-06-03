@@ -315,7 +315,7 @@ namespace Fixed_project_B
                                         } 
                                     }
                                 }
-                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
                                 volgendeMenu = Console.ReadLine();
                             }    
                             else if (volgendeMenu == "6")
@@ -385,34 +385,34 @@ namespace Fixed_project_B
                                                     mapTeller++;
                                                     Console.Write("\n");
                                                 }
-                                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
                                                 volgendeMenu = Console.ReadLine(); 
                                             }
                                             else
                                             {
                                                 Console.WriteLine("Unable to reserve this seat. This seat has already been reserved.");
-                                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
                                                 volgendeMenu = Console.ReadLine();
                                             }
                                         }
                                         else
                                         {
                                             Console.WriteLine("\nInvalid seat number.");
-                                            Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                            Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
                                             volgendeMenu = Console.ReadLine();
                                         }
                                     }
                                     else
                                     {
                                         Console.WriteLine("\nInvalid row input.");
-                                        Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                        Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
                                         volgendeMenu = Console.ReadLine();
                                     }
                                 }
                                 else
                                 {
                                     Console.WriteLine("\nInvalid room name, check if you have used the right format and make sure the room exists.");
-                                    Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                    Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
                                     volgendeMenu = Console.ReadLine();
                                 }
                             }
@@ -461,7 +461,7 @@ namespace Fixed_project_B
                                 }
                                     
                                 Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
-                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
                                 volgendeMenu = Console.ReadLine();  
                             }    
 
