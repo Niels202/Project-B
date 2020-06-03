@@ -139,26 +139,31 @@ namespace Fixed_project_B
                 users.Add(newManager.name, newManager.role);
             }
 
-            Console.WriteLine("What do you want to do?");
-            Console.WriteLine("1. Login");
-            Console.WriteLine("2. Create new user");
-            Console.WriteLine("3. Exit");
-            volgendeMenu = Console.ReadLine();
+            
             while (program == "running")
             {
-                
-            
                 while (programState == "loginMenu")
                 {
+                    Console.WriteLine("What do you want to do?");
+                    Console.WriteLine("1. Login");
+                    Console.WriteLine("2. Create new user");
+                    Console.WriteLine("3. Exit");
+                    volgendeMenu = Console.ReadLine();
                     if (volgendeMenu == "1")
                     {
-                        while (login != "succesful")
+                        login = "notYetDone";
+                        while (login != "succesful" & login != "failed")
                         {
                             Console.WriteLine("Enter your username"); 
                             string enteredUsername = Console.ReadLine();
                             Console.WriteLine("Enter your password");
                             string enteredPassword = Console.ReadLine();
-                            if (users[enteredUsername] == "admin" )
+                            if (users.ContainsKey(enteredUsername) != true)
+                            {
+                                Console.WriteLine("That username and password combination does not exist");
+                                login = "succesful";
+                            }
+                            else if (users[enteredUsername] == "admin" )
                             {
                                 foreach (admin admin in adminList)
                                 {
