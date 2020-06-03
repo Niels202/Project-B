@@ -296,24 +296,8 @@ namespace Fixed_project_B
                                 volgendeMenu = Console.ReadLine(); 
                                 
                             }
-                            
+        
                             else if (volgendeMenu == "2")
-                            {
-                                Console.WriteLine("\nHow many rows does the room have?");
-                            string enteredNumberOfRows = Console.ReadLine();
-                            int numberOfRows = Int32.Parse(enteredNumberOfRows);
-                            Console.WriteLine("\nHow many seats per row does the room have?");
-                            string enteredNumberOfSeatsPerRow = Console.ReadLine();
-                            int numberOfSeatsPerRow = Int32.Parse(enteredNumberOfSeatsPerRow);
-                            int numberOfSeats = numberOfRows*numberOfSeatsPerRow;
-                            Console.WriteLine("How much does a ticket for this room cost?"); //Price per ticket
-                            string strTicketPrice = Console.ReadLine();
-                            int intTicketPrice = Int32.Parse(strTicketPrice);
-                            roomsDict.Add(nameOfRoom, new List<List<string>>());
-                            //roomsDict.Add(nameOfRoom, intTicketPrice);
-                            List<List<string>> newRoomMap = new List<List<string>>();
-                            
-                            for (int n = 0; n < numberOfRows; n++)
                             {
                                 
                                 foreach (room i in Rooms)
@@ -331,21 +315,16 @@ namespace Fixed_project_B
                                         } 
                                     }
                                 }
-                            }
-                            
-                            Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, intTicketPrice, newRoomMap));
-                            Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
-                            volgendeMenu = Console.ReadLine();
-                            }
-                            
-                        
+                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                volgendeMenu = Console.ReadLine();
+                            }    
                             else if (volgendeMenu == "6")
                             {
                                 Environment.Exit(0);
                             }
                             else if (volgendeMenu == "4")
                             {
-                                List<string> seatCheckList = new List<string>()//Change this to check if input is int
+                                List<string> seatCheckList = new List<string>()
                                 {
                                     "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
                                 };
@@ -355,212 +334,180 @@ namespace Fixed_project_B
                                     "1", "2", "3", "4", "5", "6"
                                 };
                                 Console.WriteLine("\nInput the name of the room you would like to reserve tickets in the following format \"Room 1\"\n");
-                                nameOfRoom = Console.ReadLine();
+                                nameOfRoom = Console.ReadLine(); 
                                 Console.WriteLine("\n");
                                 //roomsDict[roomName][rij][stoel]
                                 int rowCounter = 1;
                                 int mapTeller = 0;
                                 if (roomsDict.ContainsKey(nameOfRoom))
                                 {
-                                    Console.WriteLine("\nWhat is the room number?");
-                                    nameOfRoom = "Room " + Console.ReadLine();
-                                    //Console.WriteLine("\nHow many seats does the room have?");/////////
-                                    //string enteredNumberOfSeats = Console.ReadLine();
-                                    //int numberOfSeats = Int32.Parse(enteredNumberOfSeats);
-                                    Console.WriteLine("\nDoes the room have 3D?\n1. Yes\n2. No");
-                                    string roomHas3D = Console.ReadLine();
-                                    if (roomHas3D == "1")
+                                    int dictCount = roomsDict[nameOfRoom].Count;
+                                    foreach(var i in roomsDict[nameOfRoom])
                                     {
-                                        has3D = true;
-                                    }
-                                    else
-                                    {
-                                        has3D = false;
-                                    }
-                                    
-                                    Console.WriteLine("\nHow many rows does the room have?");
-                                    string enteredNumberOfRows = Console.ReadLine();
-                                    int numberOfRows = Int32.Parse(enteredNumberOfRows);
-                                    Console.WriteLine("\nHow many seats per row does the room have?");
-                                    string enteredNumberOfSeatsPerRow = Console.ReadLine();
-                                    int numberOfSeatsPerRow = Int32.Parse(enteredNumberOfSeatsPerRow);
-                                    int numberOfSeats = numberOfRows*numberOfSeatsPerRow;
-                                    Console.WriteLine("How much does a ticket for this room cost?"); //Price per ticket 
-                                    string strTicketPrice = Console.ReadLine();
-                                    int intTicketPrice = Int32.Parse(strTicketPrice);
-                                    roomsDict.Add(nameOfRoom, new List<List<string>>());
-                                    List<List<string>> newRoomMap = new List<List<string>>();
-                                    
-                                    for (int n = 0; n < numberOfRows; n++)
-                                    {
-                                        Console.Write("Row " + rowCounter + ". ");
+                                        Console.Write("Row " + rowCounter + " - ");
                                         foreach(var e in roomsDict[nameOfRoom][mapTeller])
                                         {
-                                            int intA = a+1;
-                                            string stringA = intA.ToString();
-                                            roomsDict[nameOfRoom][n].Add(stringA);
-                                            newRoomMap[n].Add(stringA);
+                                            Console.Write(e);
+                                            Console.Write(" ");
                                         }
+                                        rowCounter++;
+                                        mapTeller++;
+                                        Console.Write("\n");
                                     }
-                                    
-                                    Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
-                                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
-                                    volgendeMenu = Console.ReadLine();  
-                                }
-                                else if (volgendeMenu == "6")
-                                {
-                                    program = "Shutdown";
-                                    programState = "Shutdown";
-                                }
-                                else if (volgendeMenu == "4")
-                                {
-                                    List<string> seatCheckList = new List<string>()
-                                    {
-                                        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
-                                    };
-
-                                    List<string> rowCheckList = new List<string>()
-                                    {
-                                        "1", "2", "3", "4", "5", "6"
-                                    };
-                                    Console.WriteLine("\nInput the name of the room you would like to reserve tickets in the following format \"Room 1\"\n");
-                                    nameOfRoom = Console.ReadLine(); 
+                                    Console.WriteLine("\nPlease enter the row and seat number you would like to reserve.");
+                                    Console.Write("Row: ");
+                                    string strRow = Console.ReadLine();
+                                    Console.Write("Seat number: ");
+                                    string strSeat = Console.ReadLine();
                                     Console.WriteLine("\n");
-                                    //roomsDict[roomName][rij][stoel]
-                                    int rowCounter = 1;
-                                    int mapTeller = 0;
-                                    if (roomsDict.ContainsKey(nameOfRoom))
-                                    {
-                                        int dictCount = roomsDict[nameOfRoom].Count;
-                                        foreach(var i in roomsDict[nameOfRoom])
-                                        {
-                                            Console.Write("Row " + rowCounter + " - ");
-                                            foreach(var e in roomsDict[nameOfRoom][mapTeller])
-                                            {
-                                                Console.Write(e);
-                                                Console.Write(" ");
-                                            }
-                                            rowCounter++;
-                                            mapTeller++;
-                                            Console.Write("\n");
-                                        }
-                                        Console.WriteLine("\nPlease enter the row and seat number you would like to reserve.");
-                                        Console.Write("Row: ");
-                                        string strRow = Console.ReadLine();
-                                        Console.Write("Seat number: ");
-                                        string strSeat = Console.ReadLine();
-                                        Console.WriteLine("\n");
 
-                                        if (rowCheckList.Contains(strRow))
+                                    if (rowCheckList.Contains(strRow))
+                                    {
+                                        if (seatCheckList.Contains(strSeat))
                                         {
-                                            if (seatCheckList.Contains(strSeat))
+                                            int intRow = Convert.ToInt32(strRow);
+                                            int intSeat = Convert.ToInt32(strSeat);
+                                            if (roomsDict[nameOfRoom][intRow-1][intSeat-1] != "-")
                                             {
-                                                int intRow = Convert.ToInt32(strRow);
-                                                int intSeat = Convert.ToInt32(strSeat);
-                                                if (roomsDict[nameOfRoom][intRow-1][intSeat-1] != "-")
+                                                //roomsDict[roomName][rij][stoel]
+                                                roomsDict[nameOfRoom][intRow-1][intSeat-1] = "-";
+                                                rowCounter = 1;
+                                                mapTeller = 0;
+                                                foreach(var i in roomsDict[nameOfRoom])
                                                 {
-                                                    //roomsDict[roomName][rij][stoel]
-                                                    roomsDict[nameOfRoom][intRow-1][intSeat-1] = "-";
-                                                    //if user has enough money
-                                                    //currentUser.balance -= roomsDict[nameOfRoom].intTicketPrice;
-                                                    rowCounter = 1;
-                                                    mapTeller = 0;
-                                                    foreach(var i in roomsDict[nameOfRoom])
+                                                    Console.Write("Row " + rowCounter + ". ");
+                                                    foreach(var e in roomsDict[nameOfRoom][mapTeller])
                                                     {
-                                                        //roomsDict[roomName][rij][stoel]
-                                                        roomsDict[nameOfRoom][intRow-1][intSeat-1] = "-";
-                                                        rowCounter = 1;
-                                                        mapTeller = 0;
-                                                        foreach(var i in roomsDict[nameOfRoom])
-                                                        {
-                                                            Console.Write("Row " + rowCounter + ". ");
-                                                            foreach(var e in roomsDict[nameOfRoom][mapTeller])
-                                                            {
-                                                                Console.Write(e);
-                                                                Console.Write(" ");
-                                                            }
-                                                            rowCounter++;
-                                                            mapTeller++;
-                                                            Console.Write("\n");
-                                                        }
-                                                        Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
-                                                        volgendeMenu = Console.ReadLine(); 
+                                                        Console.Write(e);
+                                                        Console.Write(" ");
                                                     }
+                                                    rowCounter++;
+                                                    mapTeller++;
+                                                    Console.Write("\n");
                                                 }
-                                                else
-                                                {
-                                                    Console.WriteLine("Unable to reserve this seat. This seat has already been reserved.");
-                                                    Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
-                                                    volgendeMenu = Console.ReadLine();
-                                                }
+                                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                                volgendeMenu = Console.ReadLine(); 
                                             }
                                             else
                                             {
-                                                Console.WriteLine("\nInvalid seat number.");
+                                                Console.WriteLine("Unable to reserve this seat. This seat has already been reserved.");
                                                 Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                                                 volgendeMenu = Console.ReadLine();
                                             }
                                         }
                                         else
                                         {
-                                            Console.WriteLine("\nInvalid row input.");
+                                            Console.WriteLine("\nInvalid seat number.");
                                             Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                                             volgendeMenu = Console.ReadLine();
                                         }
                                     }
                                     else
                                     {
-                                        Console.WriteLine("\nInvalid room name, check if you have used the right format and make sure the room exists.");
+                                        Console.WriteLine("\nInvalid row input.");
                                         Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                                         volgendeMenu = Console.ReadLine();
                                     }
-                                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nInvalid room name, check if you have used the right format and make sure the room exists.");
+                                    Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
                                     volgendeMenu = Console.ReadLine();
-                                }    
+                                }
+                            }
+                            else if (volgendeMenu == "3")
+                            {
+                                Console.WriteLine("\nWhat is the room number?");
+                                nameOfRoom = "Room " + Console.ReadLine();
+                                //Console.WriteLine("\nHow many seats does the room have?");/////////
+                                //string enteredNumberOfSeats = Console.ReadLine();
+                                //int numberOfSeats = Int32.Parse(enteredNumberOfSeats);
+                                Console.WriteLine("\nDoes the room have 3D?\n1. Yes\n2. No");
+                                string roomHas3D = Console.ReadLine();
+                                if (roomHas3D == "1")
+                                {
+                                    has3D = true;
+                                }
+                                else
+                                {
+                                    has3D = false;
+                                }
+                                    
+                                Console.WriteLine("\nHow many rows does the room have?");
+                                string enteredNumberOfRows = Console.ReadLine();
+                                int numberOfRows = Int32.Parse(enteredNumberOfRows);
+                                Console.WriteLine("\nHow many seats per row does the room have?");
+                                string enteredNumberOfSeatsPerRow = Console.ReadLine();
+                                int numberOfSeatsPerRow = Int32.Parse(enteredNumberOfSeatsPerRow);
+                                int numberOfSeats = numberOfRows*numberOfSeatsPerRow;
+                                Console.WriteLine("How much does a ticket for this room cost?"); //Price per ticket 
+                                string strTicketPrice = Console.ReadLine();
+                                int intTicketPrice = Int32.Parse(strTicketPrice);
+                                roomsDict.Add(nameOfRoom, new List<List<string>>());
+                                List<List<string>> newRoomMap = new List<List<string>>();
+                                
+                                for (int n = 0; n < numberOfRows; n++)
+                                {
+                                    newRoomMap.Add(new List<string>());
+                                    roomsDict[nameOfRoom].Add(new List<string>());
+                                    for (int a = 0; a < numberOfSeatsPerRow; a++)
+                                    {
+                                        int intA = a+1;
+                                        string stringA = intA.ToString();
+                                        roomsDict[nameOfRoom][n].Add(stringA);
+                                        newRoomMap[n].Add(stringA);
+                                    }
+                                }
+                                    
+                                Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
+                                Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application");
+                                volgendeMenu = Console.ReadLine();  
+                            }    
 
-                                    
-                                else if (volgendeMenu == "5")
+                                
+                            else if (volgendeMenu == "5")
+                            {
+                                programState = "loginMenu";
+                            }
+                            else if (volgendeMenu == "7")
+                            {
+                                Console.WriteLine("What is the users role?");
+                                string userRole = Console.ReadLine();    
+                                if (userRole == "customer")
                                 {
-                                    programState = "loginMenu";
+                                    Console.WriteLine("What is the users age?");
+                                    userAge = Console.ReadLine();
                                 }
-                                else if (volgendeMenu == "7")
+                                Console.WriteLine("What is the users name?");
+                                string userName = Console.ReadLine();
+                                Console.WriteLine("What is the users email?");
+                                string userEmail = Console.ReadLine();
+                                Console.WriteLine("What is the users phone number?");
+                                string userPhoneNumber = Console.ReadLine();
+                                Console.WriteLine("Enter a password for the user");
+                                string userPassword = Console.ReadLine();
+                                if (userRole == "admin")
                                 {
-                                    Console.WriteLine("What is the users role?");
-                                    string userRole = Console.ReadLine();    
-                                    if (userRole == "customer")
-                                    {
-                                        Console.WriteLine("What is the users age?");
-                                        userAge = Console.ReadLine();
-                                    }
-                                    Console.WriteLine("What is the users name?");
-                                    string userName = Console.ReadLine();
-                                    Console.WriteLine("What is the users email?");
-                                    string userEmail = Console.ReadLine();
-                                    Console.WriteLine("What is the users phone number?");
-                                    string userPhoneNumber = Console.ReadLine();
-                                    Console.WriteLine("Enter a password for the user");
-                                    string userPassword = Console.ReadLine();
-                                    if (userRole == "admin")
-                                    {
-                                        adminList.Add(new admin(userName, userEmail, userPhoneNumber, userRole, userPassword, 10000, new List<string>()));
-                                    }
-                                    else if (userRole == "customer")
-                                    {
-                                        customerList.Add(new customer(userName, userEmail, userPhoneNumber, userRole, userPassword, userAge, 0, new List<string>()));
-                                    }
-                                    else if (userRole == "caterer")
-                                    {
-                                        catererList.Add(new caterer(userName, userEmail, userPhoneNumber, userRole, userPassword, 0, new List<string>()));
-                                    }
-                                    else if (userRole == "manager")
-                                    {
-                                        managerList.Add(new manager(userName, userEmail, userPhoneNumber, userRole, userPassword,0, new List<string>()));
-                                    }
-                                    
-                                    users.Add(userName, userRole);
-                                    Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
-                                    volgendeMenu = Console.ReadLine();
+                                    adminList.Add(new admin(userName, userEmail, userPhoneNumber, userRole, userPassword, 10000, new List<string>()));
                                 }
+                                else if (userRole == "customer")
+                                {
+                                    customerList.Add(new customer(userName, userEmail, userPhoneNumber, userRole, userPassword, userAge, 0, new List<string>()));
+                                }
+                                else if (userRole == "caterer")
+                                {
+                                    catererList.Add(new caterer(userName, userEmail, userPhoneNumber, userRole, userPassword, 0, new List<string>()));
+                                }
+                                else if (userRole == "manager")
+                                {
+                                    managerList.Add(new manager(userName, userEmail, userPhoneNumber, userRole, userPassword,0, new List<string>()));
+                                }
+                                
+                                users.Add(userName, userRole);
+                                Console.WriteLine("Where do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
+                                volgendeMenu = Console.ReadLine();
+                            }
                             
                                 
                     
@@ -774,14 +721,12 @@ namespace Fixed_project_B
             }
             File.WriteAllLines(catererFile, catererOutput);
             Console.WriteLine("Data storing Finished");
-        }
-        }
-    }
+                }
+                }
             }
         }
     }
 }
-
 
 
 
