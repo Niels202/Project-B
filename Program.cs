@@ -92,12 +92,13 @@ namespace Fixed_project_B
             {
                 string[] entries = line.Split(',');
                 
-                customer newCustomer = new customer("","","","","", "",0, new List<string>());
+                customer newCustomer = new customer("","","","","", "", 0, new List<string>());
                 newCustomer.name = entries[0];
                 newCustomer.email = entries[1];
                 newCustomer.phoneNumber = entries[2];
                 newCustomer.role = entries[3];
                 newCustomer.password = entries[4];
+                newCustomer.balance = Int32.Parse(entries[5]);
                 
 
                 customerList.Add(newCustomer);
@@ -114,6 +115,7 @@ namespace Fixed_project_B
                 newCaterer.phoneNumber = entries[2];
                 newCaterer.role = entries[3];
                 newCaterer.password = entries[4];
+                newCaterer.balance = Int32.Parse(entries[5]);
                 
 
                 catererList.Add(newCaterer);
@@ -130,6 +132,7 @@ namespace Fixed_project_B
                 newManager.phoneNumber = entries[2];
                 newManager.role = entries[3];
                 newManager.password = entries[4];
+                newManager.balance = Int32.Parse(entries[5]);
                 
 
                 managerList.Add(newManager);
@@ -258,7 +261,7 @@ namespace Fixed_project_B
                         string userPhoneNumber = Console.ReadLine();
                         Console.WriteLine("\nEnter a password");
                         string userPassword = Console.ReadLine();
-                        new customer(userName, userEmail, userPhoneNumber, "customer", userPassword, userAge, 0, new List<string>());                       
+                        customerList.Add(new customer(userName, userEmail, userPhoneNumber, "customer", userPassword, userAge, 0, new List<string>()));                  
                         users.Add(userName, "customer");
                         Console.WriteLine("\nWhat do you want to do?");
                         Console.WriteLine("\n1. Login");
@@ -320,7 +323,8 @@ namespace Fixed_project_B
                             }    
                             else if (volgendeMenu == "6")
                             {
-                                Environment.Exit(0);
+                                program = "shutdown";
+                                programState = "shutdown";
                             }
                             else if (volgendeMenu == "4")
                             {
@@ -513,12 +517,20 @@ namespace Fixed_project_B
                     
                     else if (userMenu == "customer")
                     {
-                        
+                        while (programState == "running")
+                            {
+                            program = "shutdown";
+                            programState = "shutdown";
+                            }
                     }
 
                     else if (userMenu == "manager")
                     {
-                        
+                        while (programState == "running")
+                            {
+                            program = "shutdown";
+                            programState = "shutdown";
+                            }
                     }
 
                     else if (userMenu == "caterer")
@@ -713,7 +725,6 @@ namespace Fixed_project_B
                 managerOutput.Add(manager.name+ ","+ manager.email + ","+ manager.phoneNumber + ","+ manager.role + ","+ manager.password+ ","+ manager.balance);
             }
             File.WriteAllLines(managerFile, managerOutput);
-            Console.WriteLine("Data storing Finished");
             List<string> catererOutput = new List<string>();
             foreach(caterer caterer in catererList)
             {
@@ -721,12 +732,11 @@ namespace Fixed_project_B
             }
             File.WriteAllLines(catererFile, catererOutput);
             Console.WriteLine("Data storing Finished");
-                }
-                }
+            Environment.Exit(0);
             }
         }
     }
 }
-
+    }}
 
 
