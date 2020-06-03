@@ -460,7 +460,7 @@ namespace Fixed_project_B
                                     }
                                 }
                                     
-                                Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, newRoomMap));
+                                Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, intTicketPrice, newRoomMap));
                                 Console.WriteLine("\nWhere do you want to go?\n1. Cinema Info\n2. Room Info\n3. Make New Room\n4. Make reservation\n5. Log out\n6. Exit Application\n7. Create new user");
                                 volgendeMenu = Console.ReadLine();  
                             }    
