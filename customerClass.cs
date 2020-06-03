@@ -1,27 +1,35 @@
-//using System;
-//
-//namespace projectB2
-//{
-//    public class customer : user
-//    {
-//        public int age;
-//
-//        public customer(int age)
-//        {
-//            this.age = age;
-//        }
-//
-
-  //      public string buyConsumables(int num, string name, int amount, float price)
-  //      {
+using System;
+using System.Collections.Generic;
 
 
-  //      }
+class customer : user
+{
+    public string age;
+ 
 
-    //    public string makeReservation
-      //  {
+
+    public customer(string name, string email, string phoneNumber, string role, string password, string age, int balance, List<string> shoppingCart) : base(name, email, phoneNumber, role, password, balance, shoppingCart)
+    {   
+        this.age = age;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
+        this.password = password;
+        this.balance = balance;
+        this.shoppingCart = shoppingCart;
+    }
+
+    //public string buyConsumables(int num, string name, int amount, float price)
+    //{
 
 
-    //    }
-   // }
-//}
+    //}
+
+    //public string makeReservation
+    //{
+
+
+    //}
+
+}
