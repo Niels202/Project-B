@@ -522,6 +522,7 @@ namespace Fixed_project_B
                     
                     else if (userMenu == "customer")
                     {
+                        
                         while (programState == "running")
                             {
                             program = "shutdown";
