@@ -13,24 +13,7 @@ namespace Fixed_project_B
             
             // list of variables: their name, cause and where to find them.
             string program = "running";
-            int x = 0;
-            int cons_adjust = 0;            // A variable that gets the value that says which consumable from the list to adjust | line 131 |
             string userAge = "";
-            string option = "";             // A variable that gets the value that says which option the user wants to select.
-            string option2 = "";            // A variable that gets the value that says which option the user wants to select.
-            string option3 = "";            // A variable that gets the value that says which option the user wants to select.
-            string k2;                      // A variable that gets the value that says the user want to go back | line 201 |
-            string loop = "";               // A variable to that stops the while-loop when needed | while-loop line 45  |
-            string loop0 = "";              // A variable to that stops the while-loop when needed | while-loop line 69  |
-            string loop1 = "";              // A variable to that stops the while-loop when needed | while-loop line 84  |
-            string loop2 = "";              // A variable to that stops the while-loop when needed | while-loop line 125 |
-            string loop3 = "";              // A variable to that stops the while-loop when needed | while-loop line 152 |
-            string loop4 = "";              // A variable to that stops the while-loop when needed | while-loop line 166 |
-            string typecheck0 = "";         // A varibale that gets a value assigned to it. That value gets checked if it is the right type to parse to the consumable object. | line 72  |
-            string typecheck1 = "";         // A varibale that gets a value assigned to it. That value gets checked if it is the right type to parse to the consumable object. | line 87  |
-            string typecheck2 = "";         // A varibale that gets a value assigned to it. That value gets checked if it is the right type to parse to the consumable object. | line 128 |
-            string typecheck3 = "";         // A varibale that gets a value assigned to it. That value gets checked if it is the right type to parse to the consumable object. | line 154 |
-            string typecheck4 = "";         // A varibale that gets a value assigned to it. That value gets checked if it is the right type to parse to the consumable object. | line 169 |
             bool has3D = true;
             string programState = "loginMenu";
             string login = "notYetDone";
