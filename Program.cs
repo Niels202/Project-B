@@ -505,7 +505,7 @@ namespace Fixed_project_B
                     
                     else if (userMenu == "customer")
                     {
-                        
+
                         while (programState == "running")
                             {
                             program = "shutdown";
@@ -524,7 +524,11 @@ namespace Fixed_project_B
 
                     else if (userMenu == "caterer")
                     {
-
+                        while (programState == "running")
+                            {
+                            program = "shutdown";
+                            programState = "shutdown";
+                            }
                     }
                 }    
             }
