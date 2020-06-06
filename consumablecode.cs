@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using static System.Console;
 using System.ComponentModel.Design;
+using System.IO;
 
 namespace projectB2
 {
@@ -67,11 +68,8 @@ namespace projectB2
 
 	public class Program
 	{
-
 		static void Main(string[] args)
 		{
-			
-
 			// list of variables: their name, cause and where to find them.
 			int x = 0;
 			int x2 = 0;
@@ -93,8 +91,8 @@ namespace projectB2
 			string loop0 = "";              // A variable to that stops the while-loop when needed | while-loop line 69  |
 			string loop1 = "";              // A variable to that stops the while-loop when needed | while-loop line 84  |
 			string loop2 = "";
-
 			string user = "";               // A variable that gets a value containing the user-type storred into it. | line 51 |
+			string filepath = @"C:\progameer_files\data_files\dataconsumable.TXT";
 			decimal money = 10;
 
 			List<Consumable> ConsumableList = new List<Consumable>();
@@ -118,36 +116,37 @@ namespace projectB2
 
 			if (user == "caterer")
 			{
+
+
+
 				while (loop != "stop")
 				{
-
 					option2 = "";
 					option3 = "";
 
-					WriteLine("caterer menu \n 1. Add consumables \n 2. adjust consumables \n 3. show consumables");
+					Clear();
+					WriteLine("caterer menu \n 1. Add consumables \n 2. adjust consumables \n 3. show consumables \n 4. back out and safe");
 					WriteLine("chose option: "); option = ReadLine();
 
 					if (option == "1")
 					{ 
 						while (option2 != "back")
 						{
-								option2 = "";
-								ConsumableList.Add(new Consumable());
-								WriteLine("Creating new consumable... \n ");
+							option2 = "";
+							ConsumableList.Add(new Consumable());
+							WriteLine("Creating new consumable... \n ");
 
-								WriteLine("Name of new consumable: ");
-								ConsumableList[x].name = ReadLine();
+							WriteLine("Name of new consumable: ");
+							ConsumableList[x].name = ReadLine();
 								
-								ConsumableList[x].amount = Consumable.i_try_parse("Amount in stock of new consumable: ");
-								ConsumableList[x].price = Consumable.m_try_parse("The price of the new consumable: ");
+							ConsumableList[x].amount = Consumable.i_try_parse("Amount in stock of new consumable: ");
+							ConsumableList[x].price = Consumable.m_try_parse("The price of the new consumable: ");
 
-							loop0 = "";
-								ConsumableList[x].num += x;
+							ConsumableList[x].num += x;
+							x = x + 1;
 
-								WriteLine("Do you want to add / create another consumable (type add) or back out to the main menu and safe? (type back) ");
-
-								option2 = "";
-								x = x + 1;
+							WriteLine("Do you want to add / create another consumable (press enter or type anything) or back out to the main menu and safe? (type back) ");
+							option2 = ReadLine();
 						}
 					}
 
@@ -158,7 +157,7 @@ namespace projectB2
 
 						while (option3 != "back")
 						{
-							cons_adjust = Consumable.i_try_parse("Which consumable do you want to adjust? Type in the number of the consumable. \n You can find the number of the consumable with option 3 of the main menu called show consumables.");
+							cons_adjust = Consumable.i_try_parse($"Which consumable do you want to adjust? Type in the number of the consumable. \nYou can find the number of the consumable with option 3 of the main menu called show consumables.");
 
 							if (cons_adjust <= x && cons_adjust >= 0)
 							{
@@ -181,7 +180,7 @@ namespace projectB2
 
 							else
 							{
-								WriteLine("The consumable you are trying to adjust does not exist yet. Please try again.");
+								WriteLine("The consumable you are trying to adjust does not exist yet. Please give a different input.");
 							}
 						}
 					}
@@ -196,6 +195,18 @@ namespace projectB2
 						WriteLine("\n Type anything to go back.");
 						k2 = ReadLine();
 					}
+
+					else if (option == "4")
+                    {
+						List<string> cons_to_string = new List<string>();
+
+						foreach (var Consumable in ConsumableList)
+                        {
+							cons_to_string.Add($"{ Consumable.name }.{ Consumable.amount }.{ Consumable.price }.{ Consumable.num }");
+                        }
+
+						File.WriteAllLines(filepath, cons_to_string);
+                    }
 
 					else
 					{
@@ -225,27 +236,22 @@ namespace projectB2
 
 			else
 			{
+				ConsumableList = new List<Consumable>();
+				List<string> lines = File.ReadAllLines(filepath).ToList();
 
-				ConsumableList.Add(new Consumable());
-				ConsumableList[0].name = "Coiker";
-				ConsumableList[0].amount = 30;
-				ConsumableList[0].price = 2;
+				foreach (var line in lines)
+                {
+					string[] entries = line.Split('.');
 
-				ConsumableList.Add(new Consumable());
-				ConsumableList[1].name = "spite";
-				ConsumableList[1].amount = 30;
-				ConsumableList[1].price = 2;
+					Consumable newconsumable = new Consumable();
 
-				ConsumableList.Add(new Consumable());
-				ConsumableList[2].name = "energy";
-				ConsumableList[2].amount = 30;
-				ConsumableList[2].price = 2;
+					newconsumable.name = entries[0];
+					newconsumable.amount = int.Parse(entries[1]);
+					newconsumable.price = decimal.Parse(entries[2]);
+					newconsumable.num = int.Parse(entries[3]);
 
-				ConsumableList.Add(new Consumable());
-				ConsumableList[3].name = "gang";
-				ConsumableList[3].amount = 30;
-				ConsumableList[3].price = 2;
-
+					ConsumableList.Add(newconsumable);
+                }
 				List<Consumable> ConsumableList_change = ConsumableList.Select(x => x.Copy()).ToList();
 				List<Consumable> ConsumableList_cart = ConsumableList.Select(x => x.Copy()).ToList();
 
@@ -276,7 +282,7 @@ namespace projectB2
 
 					x3 = Consumable.o_try_parse("Select your option number: ", (x22 + 2));
 
-					if (x3 == x22)
+					if (x3 == x22) //ajust cart option.
 					{
 						while (loop2 != "stop")
 						{
@@ -284,7 +290,7 @@ namespace projectB2
 							x2 = 0;
 							x55 = 0;
 
-							WriteLine("The products in your cart: \n select the number of the product you would like to adjust the amount of. ");
+							WriteLine("The products in your cart: \nSelect the number of the product you would like to adjust the amount of. ");
 
 							foreach (Consumable i in ConsumableList_cart)
 							{
@@ -292,7 +298,7 @@ namespace projectB2
 								{
 									WriteLine(x55 + ". " + i.name + ": " + i.amount);
 									x55 += 1;
-									og_listposition.Add(x2);
+									og_listposition.Add(x2); // because of this list you can select the right object from the consumablelist without showing all the product that are not in your cart.
 								}
 								x2 += 1;
 							}
@@ -300,29 +306,35 @@ namespace projectB2
 
 							x5 = Consumable.o_try_parse("select your option number: ", x55);
 
-							if (x5 == x55) 
+							if (x5 == x55) // back-out in ajust cart optie.
 							{ 
 								loop2 = "stop"; 
 							}
 
 							else
 							{
-								x6 = Consumable.o_try_parse ("name: " + ConsumableList[og_listposition[x5]].name + " | current amount in your cart: " + ConsumableList_change[og_listposition[x5]].amount + "." + "\n New amount: ", ConsumableList[og_listposition[x5]].amount);
+								x6 = Consumable.o_try_parse ("name: " + ConsumableList[og_listposition[x5]].name + " | current amount in your cart: " + ConsumableList_cart[og_listposition[x5]].amount + "." + "\n New amount: ", ConsumableList[og_listposition[x5]].amount);
 
-								totalprice = totalprice - (ConsumableList_change[og_listposition[x5]].price * ConsumableList_cart[og_listposition[x5]].amount);
+								totalprice = totalprice - (ConsumableList_change[og_listposition[x5]].price * ConsumableList_cart[og_listposition[x5]].amount); // haalt het hele bedrag van het product van de totaalprice af.
+								totalprice = totalprice + (ConsumableList_change[og_listposition[x5]].price * x6);												// doet het bedrag van het product (new amount) bij de totaalprice.
+
+								// zet alle variable terug naar een staat waar er geen producten in de cart zijn gedaan.
 								ConsumableList_change[og_listposition[x5]].amount = (ConsumableList_change[og_listposition[x5]].amount + ConsumableList_cart[og_listposition[x5]].amount);
+								item_amount = item_amount - ConsumableList_cart[og_listposition[x5]].amount;
+
+								// past de variabelen aan naar de nieuwe amount.
 								ConsumableList_cart[og_listposition[x5]].amount = x6;
 								ConsumableList_change[og_listposition[x5]].amount = ConsumableList_change[og_listposition[x5]].amount - x6;
+								item_amount = item_amount + x6;
 							}
 						}
 						loop2 = "";
 					}
 
-					else if (x3 == (x22 + 1))
+					else if (x3 == (x22 + 1)) // pay option
 					{
 						if (money >= totalprice)
 						{
-
 							while (loop0 != "stop")
 							{
 								WriteLine("Are you sure you want to pay? \n Press enter to proceed, type back if you want to go back.");
@@ -339,8 +351,19 @@ namespace projectB2
 									ConsumableList = ConsumableList_change.Select(x => x.Copy()).ToList();
 									totalprice = 0;
 									item_amount = 0;
+
+									List<string> cons_to_string = new List<string>();
+
+									foreach (var Consumable in ConsumableList)
+									{
+										cons_to_string.Add($"{ Consumable.name }.{ Consumable.amount }.{ Consumable.price }.{ Consumable.num }");
+									}
+
+									File.WriteAllLines(filepath, cons_to_string);
+
 									WriteLine("Thank you for your purchase.");
 									loop0 = "stop";
+									Read();
 								}
 
 								else
@@ -358,7 +381,7 @@ namespace projectB2
 						}
 					}
 
-					else if (x3 == (x22 + 2))
+					else if (x3 == (x22 + 2)) // back out shop menu optie
 					{
 						loop1 = "stop";
 						totalprice = 0;
@@ -367,9 +390,9 @@ namespace projectB2
 
 					else
 					{
-						x4 = Consumable.i_try_parse("amount of " + ConsumableList[x3].name);
+						x4 = Consumable.i_try_parse("amount of " + ConsumableList[x3].name + ": ");
 
-						item_amount += x4;
+						item_amount += x4;																	// item_amount is the amount in cart
 						ConsumableList_change[x3].amount = (ConsumableList_change[x3].amount - x4);
 						ConsumableList_cart[x3].amount = (ConsumableList_cart[x3].amount + x4);
 						totalprice = totalprice + ConsumableList_change[x3].price * x4;
