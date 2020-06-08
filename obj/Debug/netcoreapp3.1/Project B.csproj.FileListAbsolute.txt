@@ -50,3 +50,20 @@ C:\Users\Vince\Desktop\PrB\Project-B\bin\Debug\netcoreapp3.1\Project B.runtimeco
 C:\Users\Vince\Desktop\PrB\Project-B\bin\Debug\netcoreapp3.1\Project B.dll
 C:\Users\Vince\Desktop\PrB\Project-B\bin\Debug\netcoreapp3.1\Project B.pdb
 C:\Users\Vince\Desktop\PrB\Project-B\obj\Debug\netcoreapp3.1\Project B.genruntimeconfig.cache
+C:\progameer_files\Project-B\obj\Debug\netcoreapp3.1\Project B.csprojAssemblyReference.cache
+C:\progameer_files\Project-B\obj\Debug\netcoreapp3.1\Project B.AssemblyInfoInputs.cache
+C:\progameer_files\Project-B\obj\Debug\netcoreapp3.1\Project B.AssemblyInfo.cs
+C:\progameer_files\Project-B\obj\Debug\netcoreapp3.1\Project B.csproj.CoreCompileInputs.cache
+C:\progameer_files\Project-B\obj\Debug\netcoreapp3.1\Project B.dll
+C:\progameer_files\Project-B\obj\Debug\netcoreapp3.1\Project B.pdb
+C:\progameer_files\Project-B\bin\Debug\netcoreapp3.1\Project B.exe
+C:\progameer_files\Project-B\bin\Debug\netcoreapp3.1\Project B.deps.json
+C:\progameer_files\Project-B\bin\Debug\netcoreapp3.1\Project B.runtimeconfig.json
+C:\progameer_files\Project-B\bin\Debug\netcoreapp3.1\Project B.runtimeconfig.dev.json
+C:\progameer_files\Project-B\bin\Debug\netcoreapp3.1\Project B.dll
+C:\progameer_files\Project-B\bin\Debug\netcoreapp3.1\Project B.pdb
+C:\progameer_files\Project-B\obj\Debug\netcoreapp3.1\Project B.genruntimeconfig.cache
+C:\progameer_files\Project-B\bin\Debug\netcoreapp3.1\adminFile.txt
+C:\progameer_files\Project-B\bin\Debug\netcoreapp3.1\catererFile.txt
+C:\progameer_files\Project-B\bin\Debug\netcoreapp3.1\customerFile.txt
+C:\progameer_files\Project-B\bin\Debug\netcoreapp3.1\managerFile.txt
