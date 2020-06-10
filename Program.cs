@@ -296,7 +296,8 @@ namespace Fixed_project_B
 
                     else if (volgendeMenu == "3")
                     {
-                        Environment.Exit(0);
+                        program = "shutdown";
+                        programState = "shutdown";
                     }
 
 
@@ -607,7 +608,7 @@ namespace Fixed_project_B
                         {
                             x2 = 0;
                             Console.Clear();
-                            Console.WriteLine("Welcome customer! \n Chose the product(number) you want to put in your cart or one of the other options.");
+                            Console.WriteLine("Welcome customer! \n Choose the product(number) you want to put in your cart or one of the other options.");
                             Console.WriteLine("Items in your cart: " + item_amount + " " + "| Te betalen: " + totalprice + " | " + "Money in account: " + money);
                             Console.WriteLine("");
 
@@ -788,7 +789,7 @@ namespace Fixed_project_B
 
                             Console.Clear();
                             Console.WriteLine("caterer menu \n 1. Add consumables \n 2. adjust consumables \n 3. show consumables \n 4. Safe \n 5. Log out \n 6. Exit program");
-                            Console.WriteLine("chose option: "); option = Console.ReadLine();
+                            Console.WriteLine("choose option: "); option = Console.ReadLine();
 
                             if (option == "1")
                             {

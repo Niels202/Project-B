@@ -1,13 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-<<<<<<< HEAD
       "C:\\Users\\neles\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\neles\\.nuget\\packages"
-=======
-      "C:\\Users\\Administrator\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Administrator\\.nuget\\packages"
->>>>>>> bf445a178684d0a65aedcdda0b4258b26c3d1d0e
     ]
   }
 }
