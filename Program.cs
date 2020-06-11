@@ -199,6 +199,21 @@ namespace Fixed_project_B
                 managerList.Add(newManager);
                 users.Add(newManager.name, newManager.role);
             }
+            ConsumableList = new List<Consumable>();
+            List<string> lines = File.ReadAllLines(filepath).ToList();
+            foreach (var line in lines)
+            {
+                string[] entries = line.Split('.');
+
+                Consumable newconsumable = new Consumable();
+
+                newconsumable.name = entries[0];
+                newconsumable.amount = int.Parse(entries[1]);
+                newconsumable.price = decimal.Parse(entries[2]);
+                newconsumable.num = int.Parse(entries[3]);
+
+                ConsumableList.Add(newconsumable);
+            }
 
 
             while (program == "running")
@@ -365,7 +380,6 @@ namespace Fixed_project_B
                                 Console.WriteLine(Gouda.getCinemaInfo());
                                 Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
                                 volgendeMenu = Console.ReadLine();
-
                             }
 
                             else if (volgendeMenu == "3")
@@ -623,22 +637,6 @@ namespace Fixed_project_B
                             }
                             else if (volgendeMenu == "5")
                             {
-                                ConsumableList = new List<Consumable>();
-                                List<string> lines = File.ReadAllLines(filepath).ToList();
-
-                                foreach (var line in lines)
-                                {
-                                    string[] entries = line.Split('.');
-
-                                    Consumable newconsumable = new Consumable();
-
-                                    newconsumable.name = entries[0];
-                                    newconsumable.amount = int.Parse(entries[1]);
-                                    newconsumable.price = decimal.Parse(entries[2]);
-                                    newconsumable.num = int.Parse(entries[3]);
-
-                                    ConsumableList.Add(newconsumable);
-                                }
 
                                 Console.WriteLine("welcome admin! \n Press enter if you want a overview of all the consumables in stock.");
                                 Console.Read();
@@ -662,22 +660,6 @@ namespace Fixed_project_B
                     else if (userMenu == "customer")
                     {
                         
-                        ConsumableList = new List<Consumable>();
-                        List<string> lines = File.ReadAllLines(filepath).ToList();
-
-                        foreach (var line in lines)
-                        {
-                            string[] entries = line.Split('.');
-
-                            Consumable newconsumable = new Consumable();
-
-                            newconsumable.name = entries[0];
-                            newconsumable.amount = int.Parse(entries[1]);
-                            newconsumable.price = decimal.Parse(entries[2]);
-                            newconsumable.num = int.Parse(entries[3]);
-
-                            ConsumableList.Add(newconsumable);
-                        }
                         List<Consumable> ConsumableList_change = ConsumableList.Select(x => x.Copy()).ToList();
                         List<Consumable> ConsumableList_cart = ConsumableList.Select(x => x.Copy()).ToList();
 
@@ -778,15 +760,6 @@ namespace Fixed_project_B
                                             ConsumableList = ConsumableList_change.Select(x => x.Copy()).ToList();
                                             totalprice = 0;
                                             item_amount = 0;
-
-                                            cons_to_string = new List<string>();
-
-                                            foreach (var Consumable in ConsumableList)
-                                            {
-                                                cons_to_string.Add($"{ Consumable.name }.{ Consumable.amount }.{ Consumable.price }.{ Consumable.num }");
-                                            }
-
-                                            File.WriteAllLines(filepath, cons_to_string);
 
                                             Console.WriteLine("Thank you for your purchase.");
                                             loop0 = "stop";
@@ -955,32 +928,13 @@ namespace Fixed_project_B
 
                     else if (userMenu == "caterer")
                     {
-
-                        ConsumableList = new List<Consumable>();
-                        List<string> lines = File.ReadAllLines(filepath).ToList();
-
-                        foreach (var line in lines)
-                        {
-                            string[] entries = line.Split('.');
-
-                            Consumable newconsumable = new Consumable();
-
-                            newconsumable.name = entries[0];
-                            newconsumable.amount = int.Parse(entries[1]);
-                            newconsumable.price = decimal.Parse(entries[2]);
-                            newconsumable.num = int.Parse(entries[3]);
-
-                            ConsumableList.Add(newconsumable);
-                        }
-                        
-
                         while (programState == "running")
                         {
                             option2 = "";
                             option3 = "";
 
                             Console.Clear();
-                            Console.WriteLine("caterer menu \n 1. Add consumables \n 2. adjust consumables \n 3. show consumables \n 4. Safe \n 5. Log out \n 6. Exit program");
+                            Console.WriteLine("caterer menu \n 1. Add consumables \n 2. adjust consumables \n 3. show consumables \n 4. Log out \n 5. Exit program");
                             Console.WriteLine("choose option: "); option = Console.ReadLine();
 
                             if (option == "1")
@@ -1053,22 +1007,10 @@ namespace Fixed_project_B
 
                             else if (option == "4")
                             {
-                                cons_to_string = new List<string>();
-
-                                foreach (var Consumable in ConsumableList)
-                                {
-                                    cons_to_string.Add($"{ Consumable.name }.{ Consumable.amount }.{ Consumable.price }.{ Consumable.num }");
-                                }
-
-                                File.WriteAllLines(filepath, cons_to_string);
-                            }
-
-                            else if (option == "5")
-                            {
                                 programState = "loginMenu";
                             }
 
-                            else if (option == "6")
+                            else if (option == "5")
                             {
                                 program = "shutdown";
                                 programState = "shutdown";
@@ -1112,6 +1054,13 @@ namespace Fixed_project_B
             File.WriteAllLines(catererFile, catererOutput);
             Console.WriteLine("Data storing Finished");
             Environment.Exit(0);
+
+            cons_to_string = new List<string>();
+            foreach (var Consumable in ConsumableList)
+            {
+                cons_to_string.Add($"{ Consumable.name }.{ Consumable.amount }.{ Consumable.price }.{ Consumable.num }");
+            }
+            File.WriteAllLines(filepath, cons_to_string);
 
         }
     }
