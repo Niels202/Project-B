@@ -196,20 +196,24 @@ namespace Fixed_project_B
                 managerList.Add(newManager);
                 users.Add(newManager.name, newManager.role);
             }
-            ConsumableList = new List<Consumable>();
-            List<string> lines = File.ReadAllLines(filepath).ToList();
-            foreach (var line in lines)
+
+            if (new FileInfo("consumablefile.TXT").Length != 0)
             {
-                string[] entries = line.Split('.');
+                ConsumableList = new List<Consumable>();
+                List<string> lines = File.ReadAllLines(filepath).ToList();
+                foreach (var line in lines)
+                {
+                    string[] entries = line.Split('.');
 
-                Consumable newconsumable = new Consumable();
+                    Consumable newconsumable = new Consumable();
 
-                newconsumable.name = entries[0];
-                newconsumable.amount = int.Parse(entries[1]);
-                newconsumable.price = decimal.Parse(entries[2]);
-                newconsumable.num = int.Parse(entries[3]);
-                if (new FileInfo("consumablefile.TXT").Length != 0) { x = int.Parse(entries[3]); }
-                ConsumableList.Add(newconsumable);
+                    newconsumable.name = entries[0];
+                    newconsumable.amount = int.Parse(entries[1]);
+                    newconsumable.price = decimal.Parse(entries[2]);
+                    newconsumable.num = int.Parse(entries[3]);
+                    if (new FileInfo("consumablefile.TXT").Length != 0) { x = int.Parse(entries[3]); }
+                    ConsumableList.Add(newconsumable);
+                }
             }
 
 

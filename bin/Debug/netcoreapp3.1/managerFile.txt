@@ -1,1 +1,1 @@
-George,george@gmail.com,0610893082,manager,oef,0
+Manager,george@gmail.com,0610893082,manager,password,0
