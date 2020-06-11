@@ -211,7 +211,7 @@ namespace Fixed_project_B
                 newconsumable.amount = int.Parse(entries[1]);
                 newconsumable.price = decimal.Parse(entries[2]);
                 newconsumable.num = int.Parse(entries[3]);
-
+                if (new FileInfo("consumablefile.TXT").Length != 0) { x = int.Parse(entries[3]); }
                 ConsumableList.Add(newconsumable);
             }
 
