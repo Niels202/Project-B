@@ -107,12 +107,12 @@ namespace Fixed_project_B
 
             Dictionary<string, timeSlot> timeSlotsList = new Dictionary<string, timeSlot>()
             {
-                {"09:00", time0900},
-                {"11:00", time1100},
-                {"13:00", time1300},
-                {"15:00", time1500},
-                {"19:00", time1900},
-                {"21:00", time2100}
+                {"09:00", new timeSlot(emptyMovie, emptyRoom)},
+                {"11:00", new timeSlot(emptyMovie, emptyRoom)},
+                {"13:00", new timeSlot(emptyMovie, emptyRoom)},
+                {"15:00", new timeSlot(emptyMovie, emptyRoom)},
+                {"19:00", new timeSlot(emptyMovie, emptyRoom)},
+                {"21:00", new timeSlot(emptyMovie, emptyRoom)}
             };
 
             //Tests
@@ -124,7 +124,7 @@ namespace Fixed_project_B
             movies.Add(new Movie("Shrek", "Movie description", "Movie Genre", "Minimal age"));
             Dictionary<string, Dictionary<string, timeSlot>> timeSlotDates = new Dictionary<string, Dictionary<string, timeSlot>>()
             {
-                {"01-01-2000", timeSlotsList}
+                {"00-00-0000", timeSlotsList}
             };
             
             string adminFile = Path.GetFullPath("adminFile.txt");
@@ -153,7 +153,7 @@ namespace Fixed_project_B
             {
                 string[] entries = line.Split(',');
 
-                customer newCustomer = new customer("", "", "", "", "", "", 0, new List<string>());
+                customer newCustomer = new customer("", "", "", "", "", "", 100, new List<string>());
                 newCustomer.name = entries[0];
                 newCustomer.email = entries[1];
                 newCustomer.phoneNumber = entries[2];
@@ -170,7 +170,7 @@ namespace Fixed_project_B
             {
                 string[] entries = line.Split(',');
 
-                caterer newCaterer = new caterer("", "", "", "", "", 0, new List<string>());
+                caterer newCaterer = new caterer("", "", "", "", "", 10000, new List<string>());
                 newCaterer.name = entries[0];
                 newCaterer.email = entries[1];
                 newCaterer.phoneNumber = entries[2];
@@ -187,7 +187,7 @@ namespace Fixed_project_B
             {
                 string[] entries = line.Split(',');
 
-                manager newManager = new manager("", "", "", "", "", 0, new List<string>());
+                manager newManager = new manager("", "", "", "", "", 10000, new List<string>());
                 newManager.name = entries[0];
                 newManager.email = entries[1];
                 newManager.phoneNumber = entries[2];
@@ -198,6 +198,21 @@ namespace Fixed_project_B
 
                 managerList.Add(newManager);
                 users.Add(newManager.name, newManager.role);
+            }
+            ConsumableList = new List<Consumable>();
+            List<string> lines = File.ReadAllLines(filepath).ToList();
+            foreach (var line in lines)
+            {
+                string[] entries = line.Split('.');
+
+                Consumable newconsumable = new Consumable();
+
+                newconsumable.name = entries[0];
+                newconsumable.amount = int.Parse(entries[1]);
+                newconsumable.price = decimal.Parse(entries[2]);
+                newconsumable.num = int.Parse(entries[3]);
+                if (new FileInfo("consumablefile.TXT").Length != 0) { x = int.Parse(entries[3]); }
+                ConsumableList.Add(newconsumable);
             }
 
 
@@ -365,7 +380,6 @@ namespace Fixed_project_B
                                 Console.WriteLine(Gouda.getCinemaInfo());
                                 Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
                                 volgendeMenu = Console.ReadLine();
-
                             }
 
                             else if (volgendeMenu == "3")
@@ -471,7 +485,6 @@ namespace Fixed_project_B
                                     string strSeat = Console.ReadLine();
                                     int intRow = Convert.ToInt32(strRow);
                                     int intSeat = Convert.ToInt32(strSeat);
-                                    //timeSlotDates[selectedMovieDate][selectedMovieTime].room
                                     if (timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap.Count >= intRow)
                                     {
                                         if (timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap[0].Count >= intSeat)
@@ -479,6 +492,8 @@ namespace Fixed_project_B
                                             if (timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap[intRow][intSeat] != "-")
                                             {
                                                 timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap[intRow][intSeat] = "-";
+                                                //Er hoeft geen user. voor de currentmanager
+                                                //user.currentManager.balance -= timeSlotDates[selectedMovieDate][selectedMovieTime].
                                                 Console.WriteLine("\nSeat reserved.");
                                                 //print opnieuw de map
                                                 foreach (var k in timeSlotDates)
@@ -555,6 +570,9 @@ namespace Fixed_project_B
                                 int numberOfRows = Int32.Parse(enteredNumberOfRows);
                                 Console.WriteLine("\nHow many seats per row does the room have?");
                                 string enteredNumberOfSeatsPerRow = Console.ReadLine();
+                                Console.WriteLine("How much do the tickets cost?");
+                                string ticketPrice = Console.ReadLine();
+                                int intTicketPrice = Int32.Parse(ticketPrice);
                                 int numberOfSeatsPerRow = Int32.Parse(enteredNumberOfSeatsPerRow);
                                 int numberOfSeats = numberOfRows * numberOfSeatsPerRow;
                                 roomsDict.Add(nameOfRoom, new List<List<string>>());
@@ -623,22 +641,6 @@ namespace Fixed_project_B
                             }
                             else if (volgendeMenu == "5")
                             {
-                                ConsumableList = new List<Consumable>();
-                                List<string> lines = File.ReadAllLines(filepath).ToList();
-
-                                foreach (var line in lines)
-                                {
-                                    string[] entries = line.Split('.');
-
-                                    Consumable newconsumable = new Consumable();
-
-                                    newconsumable.name = entries[0];
-                                    newconsumable.amount = int.Parse(entries[1]);
-                                    newconsumable.price = decimal.Parse(entries[2]);
-                                    newconsumable.num = int.Parse(entries[3]);
-
-                                    ConsumableList.Add(newconsumable);
-                                }
 
                                 Console.WriteLine("welcome admin! \n Press enter if you want a overview of all the consumables in stock.");
                                 Console.Read();
@@ -662,22 +664,6 @@ namespace Fixed_project_B
                     else if (userMenu == "customer")
                     {
                         
-                        ConsumableList = new List<Consumable>();
-                        List<string> lines = File.ReadAllLines(filepath).ToList();
-
-                        foreach (var line in lines)
-                        {
-                            string[] entries = line.Split('.');
-
-                            Consumable newconsumable = new Consumable();
-
-                            newconsumable.name = entries[0];
-                            newconsumable.amount = int.Parse(entries[1]);
-                            newconsumable.price = decimal.Parse(entries[2]);
-                            newconsumable.num = int.Parse(entries[3]);
-
-                            ConsumableList.Add(newconsumable);
-                        }
                         List<Consumable> ConsumableList_change = ConsumableList.Select(x => x.Copy()).ToList();
                         List<Consumable> ConsumableList_cart = ConsumableList.Select(x => x.Copy()).ToList();
 
@@ -779,15 +765,6 @@ namespace Fixed_project_B
                                             totalprice = 0;
                                             item_amount = 0;
 
-                                            cons_to_string = new List<string>();
-
-                                            foreach (var Consumable in ConsumableList)
-                                            {
-                                                cons_to_string.Add($"{ Consumable.name }.{ Consumable.amount }.{ Consumable.price }.{ Consumable.num }");
-                                            }
-
-                                            File.WriteAllLines(filepath, cons_to_string);
-
                                             Console.WriteLine("Thank you for your purchase.");
                                             loop0 = "stop";
                                             Console.Read();
@@ -803,7 +780,7 @@ namespace Fixed_project_B
 
                                 else
                                 {
-                                    Console.WriteLine("You do not have enough money for this purchase, please change the amount that is in your cart.");
+                                    Console.WriteLine("\nYou do not have enough money for this purchase.");
                                     Console.Read();
                                 }
                             }
@@ -839,21 +816,21 @@ namespace Fixed_project_B
                         
                         while (programState == "running")
                         {
-                            Console.WriteLine("Where do you want to go?\n1.Add new movie\n2.Add movie to schedule\n3.Log out\n4.Exit application");
+                            Console.WriteLine("\nWhere do you want to go?\n1.Add new movie\n2.Add movie to schedule\n3.Log out\n4.Exit application");
                             volgendeMenu = Console.ReadLine();
                             if (volgendeMenu == "1")
                             {
-                                Console.WriteLine("What is the movie name?");
+                                Console.WriteLine("\nWhat is the movie name?");
                                 string movieName = Console.ReadLine();
-                                Console.WriteLine("What is the movie description?");
+                                Console.WriteLine("\nWhat is the movie description?");
                                 string movieDescription = Console.ReadLine();
-                                Console.WriteLine("What is the movie genre?");
+                                Console.WriteLine("\nWhat is the movie genre?");
                                 string movieGenre = Console.ReadLine();
-                                Console.WriteLine("What is the minimal age?");
+                                Console.WriteLine("\nWhat is the minimal age?");
                                 string minimalAge = Console.ReadLine();
                                 if (movies.Any(movie => movie.movieName == movieName))
                                 {
-                                    Console.Write("That movie already exists");
+                                    Console.Write("\nThat movie already exists");
                                 }
                                 else
                                 {
@@ -863,14 +840,14 @@ namespace Fixed_project_B
                             }
                             else if (volgendeMenu == "2")
                             {
-                                Console.WriteLine("What movie will play?");
+                                Console.WriteLine("\nWhich movie do you want to add to schedule?");
                                 string chosenMovie = Console.ReadLine();
                                 if (!movies.Any(Movie => Movie.movieName == chosenMovie))
                                 {
                                     string movieName = "notCorrect";
                                     while (movieName == "notCorrect")
                                     {
-                                        Console.WriteLine("That moviename is not correct");
+                                        Console.WriteLine("\nInvalid movie");
                                         chosenMovie = Console.ReadLine();
                                         if (movies.Any(Movie => Movie.movieName == chosenMovie))
                                         {
@@ -878,18 +855,18 @@ namespace Fixed_project_B
                                         }
                                     }
                                 }
-                                Console.WriteLine("On what date does the movie play?   In the format 01-01-2020");
+                                Console.WriteLine("\nEnter the date the movie will play in the following format: 01-01-2020");
                                 string movieDate = Console.ReadLine();
-                                Console.WriteLine("What is the timeslot of the movie?   In the format 09:00");
+                                Console.WriteLine("\nEnter the time the movie starts using the following format and timeslots:\n09:00\n11:00\n13:00\n15:00\n17:00\n19:00\n21:00\n");
                                 string movieTimeSlot = Console.ReadLine();
-                                Console.WriteLine("In what room does the movie play?");
+                                Console.WriteLine("Enter the room the movie will play at using the following format: \"Room 1\"");
                                 string chosenRoom = Console.ReadLine();
                                 if (!Rooms.Any(Room => Room.roomName == chosenRoom))
                                 {
                                     string roomName = "notCorrect";
                                     while (roomName == "notCorrect")
                                     {
-                                        Console.WriteLine("That roomname is not correct");
+                                        Console.WriteLine("Invalid room");
                                         chosenMovie = Console.ReadLine();
                                         if (Rooms.Any(Room => Room.roomName == chosenRoom))
                                         {
@@ -897,14 +874,26 @@ namespace Fixed_project_B
                                         }
                                     }
                                 }
+                                
                                 foreach (var date in timeSlotDates)
                                 {
-                                    if (date.Key != movieTimeSlot)
+                                    if (date.Key == movieDate)
                                     {
-                                        newTimeSlotDates.Add(movieDate, new Dictionary<string, timeSlot>(timeSlotsList));
-                                        break;
+                                        
+                                    }
+                                    else
+                                    {
+                                        newTimeSlotDates.Add(movieDate, new Dictionary<string, timeSlot>());
+                                        foreach (var item in newTimeSlotDates)
+                                        {
+                                            foreach (var time in timeSlotsList)
+                                            {
+                                                item.Value.Add(time.Key, time.Value);
+                                            }
+                                        }
                                     }
                                 }
+                                
                                 foreach (var newTimeSlot in newTimeSlotDates)
                                 {
                                     timeSlotDates.Add(newTimeSlot.Key, newTimeSlot.Value);
@@ -913,8 +902,7 @@ namespace Fixed_project_B
                                 {
                                     if (listDate.Key == movieDate)
                                     {
-
-                                        foreach (var timeSlot in timeSlotsList)
+                                        foreach (var timeSlot in listDate.Value)
                                         {
                                             if (timeSlot.Key == movieTimeSlot)
                                             {
@@ -955,32 +943,13 @@ namespace Fixed_project_B
 
                     else if (userMenu == "caterer")
                     {
-
-                        ConsumableList = new List<Consumable>();
-                        List<string> lines = File.ReadAllLines(filepath).ToList();
-
-                        foreach (var line in lines)
-                        {
-                            string[] entries = line.Split('.');
-
-                            Consumable newconsumable = new Consumable();
-
-                            newconsumable.name = entries[0];
-                            newconsumable.amount = int.Parse(entries[1]);
-                            newconsumable.price = decimal.Parse(entries[2]);
-                            newconsumable.num = int.Parse(entries[3]);
-
-                            ConsumableList.Add(newconsumable);
-                        }
-                        
-
                         while (programState == "running")
                         {
                             option2 = "";
                             option3 = "";
 
                             Console.Clear();
-                            Console.WriteLine("caterer menu \n 1. Add consumables \n 2. adjust consumables \n 3. show consumables \n 4. Safe \n 5. Log out \n 6. Exit program");
+                            Console.WriteLine("caterer menu \n 1. Add consumables \n 2. adjust consumables \n 3. show consumables \n 4. Log out \n 5. Exit program");
                             Console.WriteLine("choose option: "); option = Console.ReadLine();
 
                             if (option == "1")
@@ -989,53 +958,53 @@ namespace Fixed_project_B
                                 {
                                     option2 = "";
                                     Consumable newconsumable = new Consumable();
-                                    Console.WriteLine("Creating new consumable... \n ");
+                                    Console.WriteLine("\nCreating new consumable...");
 
-                                    Console.WriteLine("Name of new consumable: ");
+                                    Console.WriteLine("\nName of new consumable: ");
                                     newconsumable.name = Console.ReadLine();
 
-                                    newconsumable.amount = Consumable.i_try_parse("Amount in stock of new consumable: ");
-                                    newconsumable.price = Consumable.m_try_parse("The price of the new consumable: ");
+                                    newconsumable.amount = Consumable.i_try_parse("\nAmount in stock of new consumable: ");
+                                    newconsumable.price = Consumable.m_try_parse("\nThe price of the new consumable: ");
 
                                     newconsumable.num += x;
                                     x = x + 1;
 
                                     ConsumableList.Add(newconsumable);
 
-                                    Console.WriteLine("Do you want to add / create another consumable (press enter or type anything) or back out to the main menu and safe? (type back) ");
+                                    Console.WriteLine("\nDo you want to add another consumable (press enter or type anything) or back out to the main menu and save? (type back)");
                                     option2 = Console.ReadLine();
                                 }
                             }
 
                             else if (option == "2")
                             {
-                                Console.WriteLine("if you want to adjust / change a consumable, press enter. If you want to go back to the main menu, type back");
+                                Console.WriteLine("\nIf you want to change a consumable, press enter. If you want to go back to the main menu, type \"back\"");
                                 option3 = Console.ReadLine();
 
                                 while (option3 != "back")
                                 {
-                                    cons_adjust = Consumable.i_try_parse($"Which consumable do you want to adjust? Type in the number of the consumable. \nYou can find the number of the consumable with option 3 of the main menu called show consumables.");
+                                    cons_adjust = Consumable.i_try_parse($"\nWhich consumable do you want to adjust? Enter the number of the consumable. \nYou can find the number of the consumable with option 3 of the main menu (show consumables)");
 
                                     if (cons_adjust <= x && cons_adjust >= 0)
                                     {
-                                        Console.WriteLine("Unajusted consumable: ");
+                                        Console.WriteLine("\nUnajusted consumable: ");
                                         Console.WriteLine(ConsumableList[cons_adjust].getData());
 
-                                        Console.WriteLine("Change what you want to change. Fill in the old value for the things you want to stay the same. \n");
+                                        Console.WriteLine("\nChange what you want to change. Fill in the old value for the things you want to stay the same. \n");
 
-                                        Console.WriteLine("Name: ");
+                                        Console.WriteLine("\nName: ");
                                         ConsumableList[cons_adjust].name = Console.ReadLine();
 
-                                        ConsumableList[cons_adjust].amount = Consumable.i_try_parse("Amount in stock: ");
-                                        ConsumableList[cons_adjust].price = Consumable.m_try_parse("Price: ");
+                                        ConsumableList[cons_adjust].amount = Consumable.i_try_parse("\nAmount in stock: ");
+                                        ConsumableList[cons_adjust].price = Consumable.m_try_parse("\nPrice: ");
 
-                                        Console.WriteLine("\n Do you want to adjust another consumable? \n If you want to adjust another consumable, press enter. If you want to go back to the main menu, type back");
+                                        Console.WriteLine("\nDo you want to adjust another consumable? \n If you want to adjust another consumable, press enter. If you want to go back to the main menu, type back");
                                         option3 = Console.ReadLine();
                                     }
 
                                     else
                                     {
-                                        Console.WriteLine("The consumable you are trying to adjust does not exist yet. Please give a different input.");
+                                        Console.WriteLine("Invalid input. Try again");
                                     }
                                 }
                             }
@@ -1047,28 +1016,16 @@ namespace Fixed_project_B
                                     Console.WriteLine(i.getData());
                                 }
 
-                                Console.WriteLine("\n Type anything to go back.");
+                                Console.WriteLine("\nType anything to go back.");
                                 Console.Read();
                             }
 
                             else if (option == "4")
                             {
-                                cons_to_string = new List<string>();
-
-                                foreach (var Consumable in ConsumableList)
-                                {
-                                    cons_to_string.Add($"{ Consumable.name }.{ Consumable.amount }.{ Consumable.price }.{ Consumable.num }");
-                                }
-
-                                File.WriteAllLines(filepath, cons_to_string);
-                            }
-
-                            else if (option == "5")
-                            {
                                 programState = "loginMenu";
                             }
 
-                            else if (option == "6")
+                            else if (option == "5")
                             {
                                 program = "shutdown";
                                 programState = "shutdown";
@@ -1076,7 +1033,7 @@ namespace Fixed_project_B
 
                             else
                             {
-                                Console.WriteLine("Wrong answer! please try again.");
+                                Console.WriteLine("Invalid input. Please try again.");
                             }
                         }
                     }
@@ -1112,6 +1069,13 @@ namespace Fixed_project_B
             File.WriteAllLines(catererFile, catererOutput);
             Console.WriteLine("Data storing Finished");
             Environment.Exit(0);
+
+            cons_to_string = new List<string>();
+            foreach (var Consumable in ConsumableList)
+            {
+                cons_to_string.Add($"{ Consumable.name }.{ Consumable.amount }.{ Consumable.price }.{ Consumable.num }");
+            }
+            File.WriteAllLines(filepath, cons_to_string);
 
         }
     }
