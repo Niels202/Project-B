@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "811x2SSxil1TEGlc0UX3xiqXkECLThK543STpHGGOMMZsCmxmA1fzgSDPPoD2RHPylhuEYR0qKw8PX99Mqk05A==",
+  "dgSpecHash": "VIN5fgUTfkVx+uFfNXGT6yJZQYX5CPec14y1OvhrpE5sOs45e+Y0Qe3t5ybxLk0b59hzHoLdhT1EYXkj7qzFoA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\neles\\OneDrive\\Documents\\GitHub\\Project-B\\Project B.csproj",
+  "projectFilePath": "C:\\Users\\Vince\\Desktop\\PrB\\Project-B\\Project B.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\neles\\OneDrive\\Documents\\GitHub\\Project-B\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }
