@@ -37,6 +37,8 @@ namespace Fixed_project_B
             List<Movie> movies = new List<Movie>();
             
             // list of variables: their name, cause and where to find them.
+            int entriesCounter = 0;
+            int listCounter = 0;
             string program = "running";
             string userAge = "";
             bool has3D = true;
@@ -52,7 +54,7 @@ namespace Fixed_project_B
             manager currentManager = new manager("", "", "", "", "", 0, new List<string>());
             Dictionary<string, Dictionary<string, timeSlot>> newTimeSlotDates = new Dictionary<string, Dictionary<string, timeSlot>>();
             Movie emptyMovie = new Movie("","","","");
-            room emptyRoom = new room(0,false,"",0,new List<List<string>>());
+            room emptyRoom = new room(0,false,new List<List<string>>(), "",0);
 
             
             cinema Gouda = new cinema("Burgemeester Jamessingel 25, 2803 WV Gouda", 3, "zondag 9:00 - 21:00\nmaandag 9:00 - 21:00\ndinsdag 9:00 - 21:00\nwoensdag 9:00 - 21:00\ndonderdag 9:00 - 21:00\nvrijdag 9:00 - 21:00\nzaterdag 9:00 - 21:00\n");
@@ -115,12 +117,14 @@ namespace Fixed_project_B
                 {"21:00", new timeSlot(emptyMovie, emptyRoom)}
             };
 
+            
+
             //Tests
             List<List<string>> testRoomMap = new List<List<string>>()
             {
                 new List<string>(){"1", "2", "3", "4", "5"}, new List<string>(){"1", "2", "3", "4", "5"}, new List<string>(){"1", "2", "3", "4", "5"}, new List<string>(){"1", "2", "3", "4", "5"}
             };
-            Rooms.Add(new room(40, true, "Room 0", 0, testRoomMap));
+            Rooms.Add(new room(40, true, testRoomMap, "Room 0", 0));
             movies.Add(new Movie("Shrek", "Movie description", "Movie Genre", "Minimal age"));
             Dictionary<string, Dictionary<string, timeSlot>> timeSlotDates = new Dictionary<string, Dictionary<string, timeSlot>>()
             {
@@ -131,6 +135,7 @@ namespace Fixed_project_B
             string customerFile = Path.GetFullPath("customerFile.txt");
             string managerFile = Path.GetFullPath("managerFile.txt");
             string catererFile = Path.GetFullPath("catererFile.txt");
+            string roomFile = Path.GetFullPath("roomFile.txt");
 
             List<string> adminFileLines = File.ReadAllLines(adminFile).ToList();
             foreach (var line in adminFileLines)
@@ -388,17 +393,14 @@ namespace Fixed_project_B
                                 foreach (room i in Rooms)
                                 {
                                     Console.WriteLine(i.getRoomInfo());
-                                    foreach (KeyValuePair<string, List<List<string>>> currentRoom in roomsDict)
+                                    foreach (var list in i.seatsMap)
                                     {
-                                        foreach (List<string> seats in roomsDict[currentRoom.Key])
+                                        foreach (string square in list)
                                         {
-                                            foreach (string square in seats)
-                                            {
-                                                Console.Write(square);
-                                                Console.Write(" ");
-                                            }
-                                            Console.Write("\n");
+                                            Console.Write(square);
+                                            Console.Write(" ");
                                         }
+                                    Console.Write("\n");
                                     }
                                 }
                                 Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
@@ -414,7 +416,7 @@ namespace Fixed_project_B
                                 Console.WriteLine("Overview of available movies: \n\n");
                                 foreach (var o in timeSlotDates) //Overzicht van alle films
                                 {
-                                    foreach (var q in timeSlotsList)
+                                    foreach (var q in o.Value)
                                     {
                                         if (q.Value.movie.movieName == "")
                                         {
@@ -437,8 +439,15 @@ namespace Fixed_project_B
                                 {
                                     foreach (var p in timeSlotDates)
                                     {
-                                        Console.WriteLine(p.Key);
-                                        foreach (var l in timeSlotsList)
+                                        foreach (var i in p.Value)
+                                        {
+                                            if (i.Value.movie.movieName == nameOfMovie)
+                                            {
+                                                Console.WriteLine(p.Key);
+                                                break;
+                                            }
+                                        }
+                                        foreach (var l in p.Value)
                                         {
                                             if (l.Value.movie.movieName == nameOfMovie)
                                             {
@@ -591,7 +600,7 @@ namespace Fixed_project_B
                                     }
                                 }
 
-                                Rooms.Add(new room(numberOfSeats, has3D, nameOfRoom, intTicketPrice, newRoomMap));
+                                Rooms.Add(new room(numberOfSeats, has3D, newRoomMap, nameOfRoom, intTicketPrice));
                                 Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
                                 volgendeMenu = Console.ReadLine();
                             }
@@ -883,14 +892,15 @@ namespace Fixed_project_B
                                     }
                                     else
                                     {
-                                        newTimeSlotDates.Add(movieDate, new Dictionary<string, timeSlot>());
-                                        foreach (var item in newTimeSlotDates)
-                                        {
-                                            foreach (var time in timeSlotsList)
-                                            {
-                                                item.Value.Add(time.Key, time.Value);
-                                            }
-                                        }
+                                        newTimeSlotDates.Add(movieDate, new Dictionary<string, timeSlot>(){
+                                            {"09:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))},
+                                            {"11:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))},
+                                            {"13:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))},
+                                            {"15:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))},
+                                            {"19:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))},
+                                            {"21:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))}
+                                        });
+                                        
                                     }
                                 }
                                 
@@ -1067,8 +1077,6 @@ namespace Fixed_project_B
                 catererOutput.Add(caterer.name + "," + caterer.email + "," + caterer.phoneNumber + "," + caterer.role + "," + caterer.password + "," + caterer.balance);
             }
             File.WriteAllLines(catererFile, catererOutput);
-            Console.WriteLine("Data storing Finished");
-            Environment.Exit(0);
 
             cons_to_string = new List<string>();
             foreach (var Consumable in ConsumableList)

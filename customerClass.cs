@@ -20,16 +20,4 @@ class customer : user
         this.shoppingCart = shoppingCart;
     }
 
-    //public string buyConsumables(int num, string name, int amount, float price)
-    //{
-
-
-    //}
-
-    //public string makeReservation
-    //{
-
-
-    //}
-
 }
