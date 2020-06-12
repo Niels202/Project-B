@@ -1028,12 +1028,12 @@ namespace Fixed_project_B
                                     else
                                     {
                                         newTimeSlotDates.Add(movieDate, new Dictionary<string, timeSlot>(){
-                                            {"09:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))},
-                                            {"11:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))},
-                                            {"13:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))},
-                                            {"15:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))},
-                                            {"19:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))},
-                                            {"21:00", new timeSlot(new Movie("","","",""), new room(0,false, new List<List<string>>(),"",0))}
+                                            {"09:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))},
+                                            {"11:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))},
+                                            {"13:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))},
+                                            {"15:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))},
+                                            {"19:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))},
+                                            {"21:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))}
                                         });
                                         
                                     }
