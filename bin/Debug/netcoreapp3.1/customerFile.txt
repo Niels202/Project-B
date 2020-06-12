@@ -1,1 +1,1 @@
-Henk,henk@gmail.com,0610893082,customer,kaas,0
+Customer,henk@gmail.com,0610893082,customer,password,0
