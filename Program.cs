@@ -701,7 +701,7 @@ namespace Fixed_project_B
                             }
                             x2 = 0;
 
-                            Console.WriteLine(x22 +1 + ". Adjust cart");
+                            Console.WriteLine((x22 +1) + ". Adjust cart");
                             Console.WriteLine((x22 + 2) + ". Reserve tickets");
                             Console.WriteLine((x22 + 3) + ". Proceed to pay");
                             Console.WriteLine((x22 + 4) + ". Log out.");
