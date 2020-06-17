@@ -701,15 +701,15 @@ namespace Fixed_project_B
                             }
                             x2 = 0;
 
-                            Console.WriteLine((x22 +1) + ". Adjust cart");
-                            Console.WriteLine((x22 + 2) + ". Reserve tickets");
-                            Console.WriteLine((x22 + 3) + ". Proceed to pay");
-                            Console.WriteLine((x22 + 4) + ". Log out.");
-                            Console.WriteLine((x22 + 5) + ". Exit Program.");
+                            Console.WriteLine(x22+ ". Adjust cart");
+                            Console.WriteLine((x22 + 1) + ". Reserve tickets");
+                            Console.WriteLine((x22 + 2) + ". Proceed to pay");
+                            Console.WriteLine((x22 + 3) + ". Log out.");
+                            Console.WriteLine((x22 + 4) + ". Exit Program.");
 
                             x3 = Consumable.o_try_parse("Select your option number: ", (x22 + 3));
 
-                            if (x3 == x22 + 1) //ajust cart option.
+                            if (x3 == x22) //ajust cart option.
                             {
                                 while (loop2 != "stop")
                                 {
@@ -758,7 +758,7 @@ namespace Fixed_project_B
                                 loop2 = "";
                             }
                             //
-                            else if (x3 == x22 + 2)
+                            else if (x3 == x22 + 1)
                             {
                                 Console.WriteLine("Overview of available movies: \n\n");
                                 foreach (var o in timeSlotDates) //Overzicht van alle films
@@ -876,28 +876,22 @@ namespace Fixed_project_B
                                         else
                                         {
                                             Console.WriteLine("Invalid seat number. Please try again.\n");
-                                            Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
-                                            volgendeMenu = Console.ReadLine();
                                         }
                                     }
                                     else
                                     {
                                         Console.WriteLine("Invalid row number. Please try again.\n");
-                                        Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
-                                        volgendeMenu = Console.ReadLine();
                                     }
                                 }
                                 else
                                 {
                                     Console.WriteLine("Invalid movie name, returning to main menu.\n");
-                                    Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
-                                    volgendeMenu = Console.ReadLine();
                                 }
                             }
                             //
 
 
-                            else if (x3 == (x22 + 3)) // pay option
+                            else if (x3 == (x22 + 2)) // pay option
                             {
                                 if (money >= totalprice)
                                 {
@@ -938,14 +932,14 @@ namespace Fixed_project_B
                                 }
                             }
 
-                            else if (x3 == (x22 + 4)) // logout optie
+                            else if (x3 == (x22 + 3)) // logout optie
                             {
                                 programState = "loginMenu";
                                 totalprice = 0;
                                 item_amount = 0;
                             }
 
-                            else if (x3 == (x22 + 5))
+                            else if (x3 == (x22 + 4))
                             {
                                 program = "shutdown";
                                 programState = "shutdown";
