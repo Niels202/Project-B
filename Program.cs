@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
-using ExtensionMethods;
 using System.IO;
 
 namespace Fixed_project_B
@@ -15,6 +14,7 @@ namespace Fixed_project_B
             int x2 = 0;
             int x22 = 0;
             int x3 = 0;
+            int x4 = 0;
             int x5 = 0;
             int x55 = 0;
             int x6 = 0;
