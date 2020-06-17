@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using ExtensionMethods;
 using System.IO;
 
 namespace Fixed_project_B
@@ -33,8 +34,6 @@ namespace Fixed_project_B
             List<Movie> movies = new List<Movie>();
             
             // list of variables: their name, cause and where to find them.
-            int entriesCounter = 0;
-            int listCounter = 0;
             string program = "running";
             string userAge = "";
             bool has3D = true;
@@ -113,8 +112,6 @@ namespace Fixed_project_B
                 {"21:00", new timeSlot(emptyMovie, emptyRoom)}
             };
 
-            
-
             //Tests
             List<List<string>> testRoomMap = new List<List<string>>()
             {
@@ -131,7 +128,6 @@ namespace Fixed_project_B
             string customerFile = Path.GetFullPath("customerFile.txt");
             string managerFile = Path.GetFullPath("managerFile.txt");
             string catererFile = Path.GetFullPath("catererFile.txt");
-            string roomFile = Path.GetFullPath("roomFile.txt");
 
             List<string> adminFileLines = File.ReadAllLines(adminFile).ToList();
             foreach (var line in adminFileLines)
@@ -200,24 +196,20 @@ namespace Fixed_project_B
                 managerList.Add(newManager);
                 users.Add(newManager.name, newManager.role);
             }
-
-            if (new FileInfo("consumablefile.TXT").Length != 0)
+            ConsumableList = new List<Consumable>();
+            List<string> lines = File.ReadAllLines(filepath).ToList();
+            foreach (var line in lines)
             {
-                ConsumableList = new List<Consumable>();
-                List<string> lines = File.ReadAllLines(filepath).ToList();
-                foreach (var line in lines)
-                {
-                    string[] entries = line.Split('.');
+                string[] entries = line.Split('.');
 
-                    Consumable newconsumable = new Consumable();
+                Consumable newconsumable = new Consumable();
 
-                    newconsumable.name = entries[0];
-                    newconsumable.amount = int.Parse(entries[1]);
-                    newconsumable.price = decimal.Parse(entries[2]);
-                    newconsumable.num = int.Parse(entries[3]);
-                    if (new FileInfo("consumablefile.TXT").Length != 0) { x = int.Parse(entries[3]); }
-                    ConsumableList.Add(newconsumable);
-                }
+                newconsumable.name = entries[0];
+                newconsumable.amount = int.Parse(entries[1]);
+                newconsumable.price = decimal.Parse(entries[2]);
+                newconsumable.num = int.Parse(entries[3]);
+                if (new FileInfo("consumablefile.TXT").Length != 0) { x = int.Parse(entries[3]); }
+                ConsumableList.Add(newconsumable);
             }
 
 
@@ -393,14 +385,17 @@ namespace Fixed_project_B
                                 foreach (room i in Rooms)
                                 {
                                     Console.WriteLine(i.getRoomInfo());
-                                    foreach (var list in i.seatsMap)
+                                    foreach (KeyValuePair<string, List<List<string>>> currentRoom in roomsDict)
                                     {
-                                        foreach (string square in list)
+                                        foreach (List<string> seats in roomsDict[currentRoom.Key])
                                         {
-                                            Console.Write(square);
-                                            Console.Write(" ");
+                                            foreach (string square in seats)
+                                            {
+                                                Console.Write(square);
+                                                Console.Write(" ");
+                                            }
+                                            Console.Write("\n");
                                         }
-                                    Console.Write("\n");
                                     }
                                 }
                                 Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
@@ -416,7 +411,7 @@ namespace Fixed_project_B
                                 Console.WriteLine("Overview of available movies: \n\n");
                                 foreach (var o in timeSlotDates) //Overzicht van alle films
                                 {
-                                    foreach (var q in o.Value)
+                                    foreach (var q in timeSlotsList)
                                     {
                                         if (q.Value.movie.movieName == "")
                                         {
@@ -439,15 +434,8 @@ namespace Fixed_project_B
                                 {
                                     foreach (var p in timeSlotDates)
                                     {
-                                        foreach (var i in p.Value)
-                                        {
-                                            if (i.Value.movie.movieName == nameOfMovie)
-                                            {
-                                                Console.WriteLine(p.Key);
-                                                break;
-                                            }
-                                        }
-                                        foreach (var l in p.Value)
+                                        Console.WriteLine(p.Key);
+                                        foreach (var l in timeSlotsList)
                                         {
                                             if (l.Value.movie.movieName == nameOfMovie)
                                             {
@@ -501,7 +489,6 @@ namespace Fixed_project_B
                                             if (timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap[intRow][intSeat] != "-")
                                             {
                                                 timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap[intRow][intSeat] = "-";
-                                                //Er hoeft geen user. voor de currentmanager
                                                 //currentManager.balance -= Movie.intTicketPrice;
                                                 Console.WriteLine("\nSeat reserved.");
                                                 //print opnieuw de map
@@ -696,11 +683,10 @@ namespace Fixed_project_B
 
                             Console.WriteLine(x22 + ". adjust cart");
                             Console.WriteLine((x22 + 1) + ". proceed to pay");
-                            Console.WriteLine((x22 + 2) + ". Reserver movie ticket");
-                            Console.WriteLine((x22 + 3) + ". Log out.");
-                            Console.WriteLine((x22 + 4) + ". Exit Program.");
+                            Console.WriteLine((x22 + 2) + ". Log out.");
+                            Console.WriteLine((x22 + 3) + ". Exit Program.");
 
-                            x3 = Consumable.o_try_parse("Select your option number: ", (x22 + 4));
+                            x3 = Consumable.o_try_parse("Select your option number: ", (x22 + 3));
 
                             if (x3 == x22) //ajust cart option.
                             {
@@ -726,7 +712,7 @@ namespace Fixed_project_B
 
                                     x5 = Consumable.o_try_parse("select your option number: ", x55);
 
-                                    if (x5 == x55) // back-out in adjust cart optie.
+                                    if (x5 == x55) // back-out in ajust cart optie.
                                     {
                                         loop2 = "stop";
                                     }
@@ -792,165 +778,163 @@ namespace Fixed_project_B
                                 }
                             }
 
-                            else if (x3 == (x22 + 3)) // logout optie
+                            else if (x3 == (x22 + 2)) // logout optie
                             {
                                 programState = "loginMenu";
                                 totalprice = 0;
                                 item_amount = 0;
                             }
 
-                            else if (x3 == (x22 + 4))
+                            else if (x3 == (x22 + 3))
                             {
                                 program = "shutdown";
                                 programState = "shutdown";
                             }
 
-                            
-                            
-                            else if (x3 == (x22 + 2))
+                            else
                             {
+                                x4 = Consumable.i_try_parse("amount of " + ConsumableList[x3].name + ": ");
 
-                                Console.WriteLine("Overview of available movies: \n\n");
-                                foreach (var o in timeSlotDates) //Overzicht van alle films
+                                item_amount += x4;                                                                  // item_amount is the amount in cart
+                                ConsumableList_change[x3].amount = (ConsumableList_change[x3].amount - x4);
+                                ConsumableList_cart[x3].amount = (ConsumableList_cart[x3].amount + x4);
+                                totalprice = totalprice + ConsumableList_change[x3].price * x4;
+                            }
+                        }
+                        //
+                        Console.WriteLine("Overview of available movies: \n\n");
+                        foreach (var o in timeSlotDates) //Overzicht van alle films
+                        {
+                            foreach (var q in timeSlotsList)
+                            {
+                                if (q.Value.movie.movieName == "")
                                 {
-                                    foreach (var q in timeSlotsList)
-                                    {
-                                        if (q.Value.movie.movieName == "")
-                                        {
 
-                                        }
-                                        else
-                                        {
-                                            movieCheckList.Add(q.Value.movie.movieName);
-                                        }
+                                }
+                                else
+                                {
+                                    movieCheckList.Add(q.Value.movie.movieName);
+                                }
+                            }
+                        }
+                        movieCheckList.Distinct(); //Removes duplicates from movielist.
+                        foreach (var n in movieCheckList)
+                        {
+                            Console.WriteLine(n);
+                        }
+                        Console.WriteLine("\nInput the name of the movie you would like to reserve tickets as the following format: \"Shrek\"\n");
+                        nameOfMovie = Console.ReadLine();
+                        if (movieCheckList.Contains(nameOfMovie))
+                        {
+                            foreach (var p in timeSlotDates)
+                            {
+                                Console.WriteLine(p.Key);
+                                foreach (var l in timeSlotsList)
+                                {
+                                    if (l.Value.movie.movieName == nameOfMovie)
+                                    {
+                                        Console.WriteLine(l.Key);
                                     }
                                 }
-                                movieCheckList.Distinct(); //Removes duplicates from movielist.
-                                foreach (var n in movieCheckList)
+                            }
+                            movieCheckList.Clear(); //Clears the moviechecklist for reuse.
+                            Console.WriteLine("Input the date you would like to see the movie at using the following format: 01-01-2020\n");
+                            selectedMovieDate = Console.ReadLine();
+                            Console.WriteLine("Input the time you would like to see " + nameOfMovie + " on " + selectedMovieDate + " at using the following format: 09:00\n");
+                            selectedMovieTime = Console.ReadLine();
+                            Console.WriteLine("Available seats: \n");
+                            foreach (var k in timeSlotDates)
+                            {
+                                if (k.Key == selectedMovieDate)
                                 {
-                                    Console.WriteLine(n);
-                                }
-                                Console.WriteLine("\nInput the name of the movie you would like to reserve tickets as the following format: \"Shrek\"\n");
-                                nameOfMovie = Console.ReadLine();
-                                if (movieCheckList.Contains(nameOfMovie))
-                                {
-                                    foreach (var p in timeSlotDates)
+                                    foreach (var m in k.Value)
                                     {
-                                        Console.WriteLine(p.Key);
-                                        foreach (var l in timeSlotsList)
+                                        if (m.Key == selectedMovieTime)
                                         {
-                                            if (l.Value.movie.movieName == nameOfMovie)
+                                            int rowCounter = 1;
+                                            int mapTeller = 0;
+                                            foreach (var i in m.Value.Room.seatsMap)
                                             {
-                                                Console.WriteLine(l.Key);
-                                            }
-                                        }
-                                    }
-                                    movieCheckList.Clear(); //Clears the moviechecklist for reuse.
-                                    Console.WriteLine("Input the date you would like to see the movie at using the following format: 01-01-2020\n");
-                                    selectedMovieDate = Console.ReadLine();
-                                    Console.WriteLine("Input the time you would like to see " + nameOfMovie + " on " + selectedMovieDate + " at using the following format: 09:00\n");
-                                    selectedMovieTime = Console.ReadLine();
-                                    Console.WriteLine("Available seats: \n");
-                                    foreach (var k in timeSlotDates)
-                                    {
-                                        if (k.Key == selectedMovieDate)
-                                        {
-                                            foreach (var m in k.Value)
-                                            {
-                                                if (m.Key == selectedMovieTime)
+                                                Console.Write("Row " + rowCounter + ". ");
+                                                foreach (var e in i)
                                                 {
-                                                    int rowCounter = 1;
-                                                    int mapTeller = 0;
-                                                    foreach (var i in m.Value.Room.seatsMap)
-                                                    {
-                                                        Console.Write("Row " + rowCounter + ". ");
-                                                        foreach (var e in i)
-                                                        {
-                                                            Console.Write(e);
-                                                            Console.Write(" ");
-                                                        }
-                                                        rowCounter++;
-                                                        mapTeller++;
-                                                        Console.Write("\n");
-                                                    }
+                                                    Console.Write(e);
+                                                    Console.Write(" ");
                                                 }
+                                                rowCounter++;
+                                                mapTeller++;
+                                                Console.Write("\n");
                                             }
                                         }
                                     }
-                                    Console.WriteLine("\nPlease enter the row and seat number you would like to reserve.");
-                                    Console.Write("Row: ");
-                                    string strRow = Console.ReadLine();
-                                    Console.Write("Seat number: ");
-                                    string strSeat = Console.ReadLine();
-                                    int intRow = Convert.ToInt32(strRow);
-                                    int intSeat = Convert.ToInt32(strSeat);
-                                    if (timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap.Count >= intRow)
+                                }
+                            }
+                            Console.WriteLine("\nPlease enter the row and seat number you would like to reserve.");
+                            Console.Write("Row: ");
+                            string strRow = Console.ReadLine();
+                            Console.Write("Seat number: ");
+                            string strSeat = Console.ReadLine();
+                            int intRow = Convert.ToInt32(strRow);
+                            int intSeat = Convert.ToInt32(strSeat);
+                            if (timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap.Count >= intRow)
+                            {
+                                if (timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap[0].Count >= intSeat)
+                                {
+                                    if (timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap[intRow][intSeat] != "-")
                                     {
-                                        if (timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap[0].Count >= intSeat)
+                                        timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap[intRow][intSeat] = "-";
+                                        //Er hoeft geen user. voor de currentmanager
+                                        //currentManager.balance -= Movie.intTicketPrice;
+                                        Console.WriteLine("\nSeat reserved.");
+                                        //print opnieuw de map
+                                        foreach (var k in timeSlotDates)
                                         {
-                                            if (timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap[intRow][intSeat] != "-")
+                                            if (k.Key == selectedMovieDate)
                                             {
-                                                timeSlotDates[selectedMovieDate][selectedMovieTime].Room.seatsMap[intRow][intSeat] = "-";
-                                                //Er hoeft geen user. voor de currentmanager
-                                                //currentManager.balance -= Movie.intTicketPrice;
-                                                Console.WriteLine("\nSeat reserved.");
-                                                //print opnieuw de map
-                                                foreach (var k in timeSlotDates)
+                                                foreach (var m in k.Value)
                                                 {
-                                                    if (k.Key == selectedMovieDate)
+                                                    if (m.Key == selectedMovieTime)
                                                     {
-                                                        foreach (var m in k.Value)
+                                                        int rowCounter = 1;
+                                                        int mapTeller = 0;
+                                                        foreach (var i in m.Value.Room.seatsMap)
                                                         {
-                                                            if (m.Key == selectedMovieTime)
+                                                            Console.Write("Row " + rowCounter + ". ");
+                                                            foreach (var e in i)
                                                             {
-                                                                int rowCounter = 1;
-                                                                int mapTeller = 0;
-                                                                foreach (var i in m.Value.Room.seatsMap)
-                                                                {
-                                                                    Console.Write("Row " + rowCounter + ". ");
-                                                                    foreach (var e in i)
-                                                                    {
-                                                                        Console.Write(e);
-                                                                        Console.Write(" ");
-                                                                    }
-                                                                    rowCounter++;
-                                                                    mapTeller++;
-                                                                    Console.Write("\n");
-                                                                }
+                                                                Console.Write(e);
+                                                                Console.Write(" ");
                                                             }
+                                                            rowCounter++;
+                                                            mapTeller++;
+                                                            Console.Write("\n");
                                                         }
                                                     }
                                                 }
-                                                //
                                             }
                                         }
-                                        else
-                                        {
-                                            Console.WriteLine(x22 + ". adjust cart");
-                                            Console.WriteLine((x22 + 1) + ". proceed to pay");
-                                            Console.WriteLine((x22 + 2) + ". Reserver movie ticket");
-                                            Console.WriteLine((x22 + 3) + ". Log out.");
-                                            Console.WriteLine((x22 + 4) + ". Exit Program.");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine(x22 + ". adjust cart");
-                                        Console.WriteLine((x22 + 1) + ". proceed to pay");
-                                        Console.WriteLine((x22 + 2) + ". Reserver movie ticket");
-                                        Console.WriteLine((x22 + 3) + ". Log out.");
-                                        Console.WriteLine((x22 + 4) + ". Exit Program.");
+                                        //
                                     }
                                 }
                                 else
                                 {
-                                    Console.WriteLine(x22 + ". adjust cart");
-                                    Console.WriteLine((x22 + 1) + ". proceed to pay");
-                                    Console.WriteLine((x22 + 2) + ". Reserver movie ticket");
-                                    Console.WriteLine((x22 + 3) + ". Log out.");
-                                    Console.WriteLine((x22 + 4) + ". Exit Program.");
+                                    Console.WriteLine("Invalid seat number. Please try again.\n");
+                                    Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
+                                    volgendeMenu = Console.ReadLine();
                                 }
                             }
+                            else
+                            {
+                                Console.WriteLine("Invalid row number. Please try again.\n");
+                                Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
+                                volgendeMenu = Console.ReadLine();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid movie name, returning to main menu.\n");
+                            Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
+                            volgendeMenu = Console.ReadLine();
                         }
                     }
 
@@ -1029,15 +1013,14 @@ namespace Fixed_project_B
                                     }
                                     else
                                     {
-                                        newTimeSlotDates.Add(movieDate, new Dictionary<string, timeSlot>(){
-                                            {"09:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))},
-                                            {"11:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))},
-                                            {"13:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))},
-                                            {"15:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))},
-                                            {"19:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))},
-                                            {"21:00", new timeSlot(new Movie("","","","",0), new room(0, false, "", new List<List<string>>()))}
-                                        });
-                                        
+                                        newTimeSlotDates.Add(movieDate, new Dictionary<string, timeSlot>());
+                                        foreach (var item in newTimeSlotDates)
+                                        {
+                                            foreach (var time in timeSlotsList)
+                                            {
+                                                item.Value.Add(time.Key, time.Value);
+                                            }
+                                        }
                                     }
                                 }
                                 
@@ -1189,6 +1172,7 @@ namespace Fixed_project_B
 
 
             //Shutdown data store sequence
+            Console.WriteLine("Data storing started");
             List<string> adminOutput = new List<string>();
             foreach (admin admin in adminList)
             {
@@ -1213,6 +1197,8 @@ namespace Fixed_project_B
                 catererOutput.Add(caterer.name + "," + caterer.email + "," + caterer.phoneNumber + "," + caterer.role + "," + caterer.password + "," + caterer.balance);
             }
             File.WriteAllLines(catererFile, catererOutput);
+            Console.WriteLine("Data storing Finished");
+            Environment.Exit(0);
 
             cons_to_string = new List<string>();
             foreach (var Consumable in ConsumableList)
