@@ -14,7 +14,6 @@ namespace Fixed_project_B
             int x2 = 0;
             int x22 = 0;
             int x3 = 0;
-            int x4 = 0;
             int x5 = 0;
             int x55 = 0;
             int x6 = 0;
@@ -27,14 +26,11 @@ namespace Fixed_project_B
             string option3 = "";            // A variable that gets the value that says which option the user wants to select.
             string option4 = "";
             string loop0 = "";              // A variable to that stops the while-loop when needed | while-loop line 69  |
-            string loop2 = "";
-            string user = "";               // A variable that gets a value containing the user-type storred into it. | line 51 |
+            string loop2 = "";              
             string filepath = Path.GetFullPath("consumablefile.TXT");
             List<Movie> movies = new List<Movie>();
             
             // list of variables: their name, cause and where to find them.
-            int entriesCounter = 0;
-            int listCounter = 0;
             string program = "running";
             string userAge = "";
             bool has3D = true;
