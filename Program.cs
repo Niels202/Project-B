@@ -586,8 +586,30 @@ namespace Fixed_project_B
                                 Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
                                 volgendeMenu = Console.ReadLine();
                             }
-
-
+                            else if (volgendeMenu == "7")
+                            {
+                                Console.WriteLine("\nWhat is the movie name?");
+                                string movieName = Console.ReadLine();
+                                Console.WriteLine("\nWhat is the movie description?");
+                                string movieDescription = Console.ReadLine();
+                                Console.WriteLine("\nWhat is the movie genre?");
+                                string movieGenre = Console.ReadLine();
+                                Console.WriteLine("\nWhat is the minimal age?");
+                                string minimalAge = Console.ReadLine();
+                                Console.WriteLine("How much do the tickets cost?");
+                                string ticketPrice = Console.ReadLine();
+                                int intTicketPrice = Convert.ToInt32(ticketPrice);
+                                if (movies.Any(movie => movie.movieName == movieName))
+                                {
+                                    Console.Write("\nThat movie already exists");
+                                }
+                                else
+                                {
+                                    movies.Add(new Movie(movieName, movieDescription, movieGenre, minimalAge, intTicketPrice));
+                                }
+                                Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
+                                volgendeMenu = Console.ReadLine();
+                            }
                             else if (volgendeMenu == "9")
                             {
                                 programState = "loginMenu";
