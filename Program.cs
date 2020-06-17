@@ -376,7 +376,101 @@ namespace Fixed_project_B
                                 Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
                                 volgendeMenu = Console.ReadLine();
                             }
+                            //
+                            else if (volgendeMenu == "8")
+                            {
+                                Console.WriteLine("\nWhich movie do you want to add to schedule?");
+                                string chosenMovie = Console.ReadLine();
+                                if (!movies.Any(Movie => Movie.movieName == chosenMovie))
+                                {
+                                    string movieName = "notCorrect";
+                                    while (movieName == "notCorrect")
+                                    {
+                                        Console.WriteLine("\nInvalid movie");
+                                        chosenMovie = Console.ReadLine();
+                                        if (movies.Any(Movie => Movie.movieName == chosenMovie))
+                                        {
+                                            movieName = "correct";
+                                        }
+                                    }
+                                }
+                                Console.WriteLine("\nEnter the date the movie will play in the following format: 01-01-2020");
+                                string movieDate = Console.ReadLine();
+                                Console.WriteLine("\nEnter the time the movie starts using the following format and timeslots:\n09:00\n11:00\n13:00\n15:00\n17:00\n19:00\n21:00\n");
+                                string movieTimeSlot = Console.ReadLine();
+                                Console.WriteLine("Enter the room the movie will play at using the following format: \"Room 1\"");
+                                string chosenRoom = Console.ReadLine();
+                                if (!Rooms.Any(Room => Room.roomName == chosenRoom))
+                                {
+                                    string roomName = "notCorrect";
+                                    while (roomName == "notCorrect")
+                                    {
+                                        Console.WriteLine("Invalid room");
+                                        chosenMovie = Console.ReadLine();
+                                        if (Rooms.Any(Room => Room.roomName == chosenRoom))
+                                        {
+                                            roomName = "correct";
+                                        }
+                                    }
+                                }
+                                
+                                foreach (var date in timeSlotDates)
+                                {
+                                    if (date.Key == movieDate)
+                                    {
+                                        
+                                    }
+                                    else
+                                    {
+                                        newTimeSlotDates.Add(movieDate, new Dictionary<string, timeSlot>());
+                                        foreach (var item in newTimeSlotDates)
+                                        {
+                                            foreach (var time in timeSlotsList)
+                                            {
+                                                item.Value.Add(time.Key, time.Value);
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                foreach (var newTimeSlot in newTimeSlotDates)
+                                {
+                                    timeSlotDates.Add(newTimeSlot.Key, newTimeSlot.Value);
+                                }
+                                foreach (var listDate in timeSlotDates)
+                                {
+                                    if (listDate.Key == movieDate)
+                                    {
+                                        foreach (var timeSlot in listDate.Value)
+                                        {
+                                            if (timeSlot.Key == movieTimeSlot)
+                                            {
+                                                foreach (var listMovie in movies)
+                                                {
 
+                                                    if (listMovie.movieName == chosenMovie)
+                                                    {
+                                                        timeSlot.Value.movie = listMovie;
+
+                                                    }          
+                                                }
+                                                foreach (var listRoom in Rooms)
+                                                {
+
+                                                    if (listRoom.roomName == chosenRoom)
+                                                    {
+                                                        timeSlot.Value.Room = listRoom;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                Console.WriteLine("Succesfully added to schedule!");
+                                Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
+                                volgendeMenu = Console.ReadLine();
+                            }
+                            //
                             else if (volgendeMenu == "3")
                             {
 
@@ -655,7 +749,7 @@ namespace Fixed_project_B
                             else if (volgendeMenu == "5")
                             {
 
-                                Console.WriteLine("welcome admin! \n Press enter if you want a overview of all the consumables in stock.");
+                                Console.WriteLine("Welcome admin! \nPress enter if you want a overview of all the consumables in stock.");
                                 Console.Read();
 
                                 foreach (Consumable i in ConsumableList)
@@ -663,7 +757,7 @@ namespace Fixed_project_B
                                     Console.WriteLine(i.getData());
                                 }
 
-                                Console.WriteLine("\n Type anything to go back.");
+                                Console.WriteLine("\nType anything to go back.");
                                 Console.Read();
 
                                 Console.WriteLine("Where do you want to go?\n1. Create new user\n2. Cinema Info\n3. Room Info\n4. Make New Room\n5. Get consumable overview\n6. Make reservation\n7. Configure new movie\n8. Assign movie to timeslot\n9. Log out\n10. Exit application");
